@@ -1,0 +1,1083 @@
+Ticker,Price,Sector
+"MMM 
+",178.49,Industrials 
+"ABT 
+",40.76,Health Care 
+"ABBV 
+",61.66,Health Care 
+"ACN 
+",115.95,Information Technology 
+"ATVI 
+",39.08,Information Technology 
+"AYI 
+",206.28,Industrials 
+"ADBE 
+",108.79,Information Technology 
+"AAP 
+",173.98,Consumer Discretionary 
+"AES 
+",11.93,Utilities 
+"AET 
+",120.97,Health Care 
+"AMG 
+",142.03,Financials 
+"AFL 
+",69.97,Financials 
+"A 
+",48.25,Health Care 
+"APD 
+",146.33,Materials 
+"AKAM 
+",69.6,Information Technology 
+"ALK 
+",92.93,Industrials 
+"ALB 
+",92.6,Materials 
+"AGN 
+",216.56,Health Care 
+"LNT 
+",37.7,Utilities 
+"ALXN 
+",135.87,Health Care 
+"ALLE 
+",66.48,Industrials 
+"ADS 
+",231.62,Information Technology 
+"ALL 
+",74.52,Financials 
+"GOOGL 
+",829.02,Information Technology 
+"GOOG 
+",806.07,Information Technology 
+"MO 
+",69.16,Consumer Staples 
+"AMZN 
+",807.48,Consumer Discretionary 
+"AEE 
+",52.36,Utilities 
+"AAL 
+",47.64,Industrials 
+"AEP 
+",63.46,Utilities 
+"AXP 
+",77.49,Financials 
+"AIG 
+",66.24,Financials 
+"AMT 
+",105.67,Real Estate 
+"AWK 
+",72.6,Utilities 
+"AMP 
+",113.41,Financials 
+"ABC 
+",85.51,Health Care 
+"AME 
+",50.71,Industrials
+"AMGN 
+",155.77,Health Care 
+"APH 
+",68.28,Information Technology 
+"APC 
+",69.89,Energy 
+"ADI 
+",73.01,Information Technology 
+"ANTM 
+",147.22,Health Care 
+"AON 
+",114.05,Financials 
+"APA 
+",62.91,Energy 
+"AIV 
+",44.46,Real Estate 
+"AAPL 
+",119.99,Information Technology 
+"AMAT 
+",33.69,Information Technology 
+"ADM 
+",44.95,Consumer Staples 
+"ARNC 
+",20.88,Industrials 
+"AJG 
+",52.93,Financials 
+"AIZ 
+",95.12,Financials 
+"T 
+",40.8,Telecommunications Services 
+"ADSK 
+",79.71,Information Technology 
+"ADP 
+",102.91,Information Technology 
+"AN 
+",51.82,Consumer Discretionary 
+"AZO 
+",778.3,Consumer Discretionary 
+"AVB 
+",176.57,Real Estate 
+"AVY 
+",73.17,Materials 
+"BHI 
+",61.74,Energy 
+"BLL 
+",76.98,Materials 
+"BAC 
+",22.63,Financials 
+"BK 
+",46.23,Financials 
+"BCR 
+",234.79,Health Care 
+"BAX 
+",46.77,Health Care 
+"BBT 
+",46.2,Financials 
+"BDX 
+",173.98,Health Care 
+"BBBY 
+",41.09,Consumer Discretionary 
+"BRK_B 
+",160.49,Financials 
+"BBY 
+",44.77,Consumer Discretionary 
+"BIIB 
+",283.61,Health Care 
+"BLK 
+",378,Financials 
+"HRB 
+",23.66,Financials 
+"BA 
+",158.32,Industrials 
+"BWA 
+",39.78,Consumer Discretionary 
+"BXP 
+",130.36,Real Estate 
+"BSX 
+",23.92,Health Care 
+"BMY 
+",56.07,Health Care 
+"AVGO 
+",185.02,Information Technology 
+"BF_B 
+",44.77,Consumer Staples 
+"CHRW 
+",74.05,Industrials 
+"CA 
+",32.7,Information Technology 
+"COG 
+",21.67,Energy 
+"CPB 
+",62.29,Consumer Staples 
+"COF 
+",87.28,Financials 
+"CAH 
+",75.8,Health Care 
+"HSIC 
+",159.69,Health Care 
+"KMX 
+",65.68,Consumer Discretionary 
+"CCL 
+",53.6,Consumer Discretionary 
+"CAT 
+",93.33,Industrials 
+"CBG 
+",30.51,Real Estate 
+"CBS 
+",63.49,Consumer Discretionary 
+"CELG 
+",115.22,Health Care 
+"CNC 
+",62.87,Health Care 
+"CNP 
+",25.68,Utilities 
+"CTL 
+",25.47,Telecommunications Services 
+"CERN 
+",52.29,Health Care 
+"CF 
+",32.32,Materials 
+"SCHW 
+",41.1,Financials 
+"CHTR 
+",303.69,Consumer Discretionary 
+"CHK 
+",6.98,Energy 
+"CVX 
+",115.94,Energy 
+"CMG 
+",409.74,Consumer Discretionary
+"CB 
+",131.97,Financials 
+"CHD 
+",44.74,Consumer Staples 
+"CI 
+",141.97,Health Care 
+"XEC 
+",138.34,Energy 
+"CINF 
+",70.54,Financials 
+"CTAS 
+",113.97,Industrials 
+"CSCO 
+",30.03,Information Technology 
+"C 
+",57.39,Financials 
+"CFG 
+",34.99,Financials
+"CTXS 
+",93.56,Information Technology 
+"CLX 
+",120.91,Consumer Staples 
+"CME 
+",117.25,Financials 
+"CMS 
+",42.19,Utilities 
+"COH 
+",35.35,Consumer Discretionary 
+"KO 
+",41.29,Consumer Staples 
+"CTSH 
+",57.36,Information Technology 
+"CL 
+",67.86,Consumer Staples 
+"CMCSA 
+",72.29,Consumer Discretionary 
+"CMA 
+",67.06,Financials 
+"CAG 
+",38.72,Consumer Staples 
+"CXO 
+",135.68,Energy 
+"COP 
+",50.27,Energy 
+"ED 
+",74.43,Utilities 
+"STZ 
+",150.48,Consumer Staples 
+"GLW 
+",24.56,Information Technology 
+"COST 
+",164.27,Consumer Staples 
+"COTY 
+",18.93,Consumer Staples 
+"CCI 
+",87.2,Real Estate 
+"CSRA 
+",32.8,Information Technology 
+"CSX 
+",36.88,Industrials 
+"CMI 
+",139.9,Industrials 
+"CVS 
+",83.54,Consumer Staples 
+"DHI 
+",28.5,Consumer Discretionary 
+"DHR 
+",81.19,Industrials 
+"DRI 
+",73.16,Consumer Discretionary 
+"DVA 
+",63.89,Health Care 
+"DE 
+",105.24,Industrials 
+"DLPH 
+",71.5,Consumer Discretionary 
+"DAL 
+",50.3,Industrials 
+"XRAY 
+",56.55,Health Care 
+"DVN 
+",46.36,Energy 
+"DLR 
+",104.63,Real Estate 
+"DFS 
+",70.36,Financials 
+"DISCA 
+",28.01,Consumer Discretionary 
+"DISCK 
+",27.4,Consumer Discretionary 
+"DG 
+",72.44,Consumer Discretionary 
+"DLTR 
+",77.31,Consumer Discretionary 
+"D 
+",76.17,Utilities 
+"DOV 
+",78.4,Industrials 
+"DOW 
+",57.71,Materials 
+"DPS 
+",90.34,Consumer Staples 
+"DTE 
+",98.89,Utilities 
+"DD 
+",73.45,Materials 
+"DUK 
+",77.5,Utilities 
+"DNB 
+",123.26,Industrials 
+"ETFC 
+",36.37,Financials 
+"EMN 
+",77.19,Materials 
+"ETN 
+",67.8,Industrials 
+"EBAY 
+",30.39,Information Technology 
+"ECL 
+",119.07,Materials 
+"EIX 
+",72.3,Utilities 
+"EW 
+",95.79,Health Care 
+"EA 
+",80.53,Information Technology 
+"EMR 
+",57.22,Industrials 
+"ENDP 
+",13.17,Health Care 
+"ETR 
+",71.89,Utilities 
+"EVHC 
+",68.92,Health Care 
+"EOG 
+",105.4,Energy 
+"EQT 
+",62.53,Energy 
+"EFX 
+",120.26,Industrials 
+"EQIX 
+",376.73,Real Estate 
+"EQR 
+",63.6,Real Estate 
+"ESS 
+",227.9,Real Estate 
+"EL 
+",79.27,Consumer Staples 
+"ES 
+",55.52,Utilities 
+"EXC 
+",35.71,Utilities 
+"EXPE 
+",119.34,Consumer Discretionary 
+"EXPD 
+",53.72,Industrials 
+"ESRX 
+",72.67,Health Care 
+"EXR 
+",73.17,Real Estate 
+"XOM 
+",86.28,Energy 
+"FFIV 
+",142.84,Information Technology 
+"FB 
+",127.92,Information Technology 
+"FAST 
+",51.06,Industrials 
+"FRT 
+",141.53,Real Estate 
+"FDX 
+",187.23,Industrials 
+"FIS 
+",79.46,Information Technology 
+"FITB 
+",26.33,Financials 
+"FSLR 
+",34.41,Information Technology 
+"FE 
+",30.76,Utilities 
+"FISV 
+",110.08,Information Technology 
+"FLIR 
+",35.4,Information Technology 
+"FLS 
+",49.86,Industrials 
+"FLR 
+",52.98,Industrials 
+"FMC 
+",58.55,Materials 
+"FTI 
+",34.92,Energy 
+"FL 
+",69.35,Consumer Discretionary 
+"F 
+",12.41,Consumer Discretionary 
+"FTV 
+",54.14,Industrials 
+"FBHS 
+",54.3,Industrials 
+"BEN 
+",40.01,Financials 
+"FCX 
+",15.24,Materials 
+"FTR 
+",3.54,Telecommunications Services 
+"GPS 
+",23.97,Consumer Discretionary 
+"GRMN 
+",47.76,Consumer Discretionary 
+"GD 
+",175.99,Industrials 
+"GE 
+",31.23,Industrials 
+"GGP 
+",25.1,Real Estate 
+"GIS 
+",62.08,Consumer Staples 
+"GM 
+",37.47,Consumer Discretionary 
+"GPC 
+",99.29,Consumer Discretionary 
+"GILD 
+",72.13,Health Care 
+"GPN 
+",78.62,Information Technology 
+"GS 
+",234.29,Financials 
+"GT 
+",30.54,Consumer Discretionary 
+"GWW 
+",244.61,Industrials 
+"HAL 
+",55.13,Energy 
+"HBI 
+",22.01,Consumer Discretionary 
+"HOG 
+",58.52,Consumer Discretionary 
+"HAR 
+",110.7,Consumer Discretionary 
+"HRS 
+",100.85,Information Technology 
+"HIG 
+",49.4,Financials 
+"HAS 
+",84.55,Consumer Discretionary 
+"HCA 
+",79.73,Health Care 
+"HCP 
+",30.55,Real Estate 
+"HP 
+",78.49,Energy 
+"HES 
+",58.83,Energy 
+"HPE 
+",22.86,Information Technology 
+"HOLX 
+",39.95,Health Care 
+"HD 
+",136.16,Consumer Discretionary 
+"HON 
+",118.06,Industrials 
+"HRL 
+",36.17,Consumer Staples 
+"HST 
+",18.31,Real Estate 
+"HPQ 
+",14.58,Information Technology 
+"HUM 
+",206.11,Health Care 
+"HBAN 
+",13.15,Financials 
+"IDXX 
+",118.9,Health Care 
+"ITW 
+",123.66,Industrials 
+"ILMN 
+",161.23,Health Care 
+"IR 
+",77.14,Industrials 
+"INTC 
+",36.76,Information Technology 
+"ICE 
+",57.31,Financials 
+"IBM 
+",166.8,Information Technology 
+"IP 
+",53.03,Materials 
+"IPG 
+",23.53,Consumer Discretionary 
+"IFF 
+",117.83,Materials 
+"INTU 
+",115.79,Information Technology 
+"ISRG 
+",663.07,Health Care 
+"IVZ 
+",30.55,Financials 
+"IRM 
+",34.1,Real Estate 
+"JEC 
+",58.02,Industrials 
+"JBHT 
+",98.03,Industrials 
+"SJM 
+",133,Consumer Staples 
+"JNJ 
+",114.7,Health Care 
+"JCI 
+",43.09,Industrials 
+"JPM 
+",83.94,Financials 
+"JNPR 
+",27.34,Information Technology 
+"KSU 
+",84.96,Industrials 
+"K 
+",71.98,Consumer Staples 
+"KEY 
+",18.13,Financials 
+"KMB 
+",116.4,Consumer Staples 
+"KIM 
+",25.5,Real Estate 
+"KMI 
+",22.44,Energy 
+"KLAC 
+",81.63,Information Technology 
+"KSS 
+",41.21,Consumer Discretionary 
+"KHC 
+",88.35,Consumer Staples 
+"KR 
+",34.91,Consumer Staples 
+"LB 
+",61.87,Consumer Discretionary 
+"LLL 
+",148.49,Industrials 
+"LH 
+",134.39,Health Care 
+"LRCX 
+",111.24,Information Technology 
+"LEG 
+",47.45,Industrials 
+"LEN 
+",44.3,Consumer Discretionary 
+"LVLT 
+",58.84,Telecommunications Services 
+"LUK 
+",23.2,Financials 
+"LLY 
+",77.53,Health Care 
+"LNC 
+",67.06,Financials 
+"LLTC 
+",62.45,Information Technology 
+"LKQ 
+",31.87,Consumer Discretionary 
+"LMT 
+",254.07,Industrials 
+"L 
+",46.26,Financials 
+"LOW 
+",71.38,Consumer Discretionary 
+"LYB 
+",90.05,Materials 
+"MTB 
+",154.64,Financials 
+"MAC 
+",70.37,Real Estate 
+"IRM 
+",34.1,Real Estate 
+"JEC 
+",58.02,Industrials 
+"JBHT 
+",98.03,Industrials 
+"SJM 
+",133,Consumer Staples 
+"JNJ 
+",114.7,Health Care 
+"JCI 
+",43.09,Industrials 
+"JPM 
+",83.94,Financials 
+"JNPR 
+",27.34,Information Technology 
+"KSU 
+",84.96,Industrials 
+"K 
+",71.98,Consumer Staples 
+"KEY 
+",18.13,Financials 
+"KMB 
+",116.4,Consumer Staples 
+"KIM 
+",25.5,Real Estate 
+"KMI 
+",22.44,Energy 
+"KLAC 
+",81.63,Information Technology 
+"KSS 
+",41.21,Consumer Discretionary 
+"KHC 
+",88.35,Consumer Staples 
+"KR 
+",34.91,Consumer Staples 
+"LB 
+",61.87,Consumer Discretionary 
+"LLL 
+",148.49,Industrials 
+"LH 
+",134.39,Health Care 
+"LRCX 
+",111.24,Information Technology 
+"LEG 
+",47.45,Industrials 
+"LEN 
+",44.3,Consumer Discretionary 
+"LVLT 
+",58.84,Telecommunications Services 
+"LUK 
+",23.2,Financials 
+"LLY 
+",77.53,Health Care 
+"LNC 
+",67.06,Financials 
+"LLTC 
+",62.45,Information Technology 
+"LKQ 
+",31.87,Consumer Discretionary 
+"LMT 
+",254.07,Industrials 
+"L 
+",46.26,Financials 
+"LOW 
+",71.38,Consumer Discretionary 
+"LYB 
+",90.05,Materials 
+"MTB 
+",154.64,Financials 
+"MAC 
+",70.37,Real Estate 
+"M 
+",29.44,Consumer Discretionary 
+"MNK 
+",46.53,Health Care 
+"MRO 
+",17.33,Energy 
+"MPC 
+",48.9,Energy 
+"MAR 
+",83,Consumer Discretionary 
+"MMC 
+",68.17,Financials 
+"MLM 
+",225.36,Materials 
+"MAS 
+",32.1,Industrials 
+"MA 
+",108.66,Information Technology 
+"MAT 
+",30.47,Consumer Discretionary 
+"MKC 
+",93.06,Consumer Staples 
+"MCD 
+",122.71,Consumer Discretionary 
+"MCK 
+",149.74,Health Care 
+"MJN 
+",75.25,Consumer Staples 
+"MDT 
+",75.67,Health Care 
+"MRK 
+",61.17,Health Care 
+"MET 
+",54.06,Financials 
+"MTD 
+",421.73,Health Care 
+"KORS 
+",43.23,Consumer Discretionary 
+"MCHP 
+",66.5,Information Technology 
+"MU 
+",22.32,Information Technology 
+"MSFT 
+",62.5,Information Technology 
+"MAA 
+",96.32,Real Estate 
+"MHK 
+",204.09,Consumer Discretionary 
+"TAP 
+",98.2,Consumer Staples 
+"MDLZ 
+",45.03,Consumer Staples 
+"MON 
+",108.1,Materials 
+"MNST 
+",43.46,Consumer Staples 
+"MCO 
+",99.33,Financials 
+"MS 
+",42.86,Financials 
+"MOS 
+",30.6,Materials 
+"MSI 
+",81.65,Information Technology 
+"MUR 
+",31.24,Energy 
+"MYL 
+",37.19,Health Care 
+"NDAQ 
+",67.25,Financials 
+"NOV 
+",37.42,Energy 
+"NAVI 
+",16.05,Financials 
+"NTAP 
+",35.99,Information Technology 
+"NFLX 
+",133.25,Information Technology 
+"NWL 
+",47.55,Consumer Discretionary 
+"NFX 
+",41.67,Energy 
+"NEM 
+",35.26,Materials 
+"NWSA 
+",12.14,Consumer Discretionary 
+"NWS 
+",12.55,Consumer Discretionary 
+"NEE 
+",120.03,Utilities 
+"NLSN 
+",41.89,Industrials 
+"NKE 
+",53.27,Consumer Discretionary 
+"NI 
+",22.52,Utilities 
+"NBL 
+",39.79,Energy 
+"JWN 
+",44.31,Consumer Discretionary 
+"NSC 
+",109.97,Industrials 
+"NTRS 
+",83.99,Financials 
+"NOC 
+",230.24,Industrials 
+"NRG 
+",15.26,Utilities 
+"NUE 
+",62.38,Materials 
+"NVDA 
+",102.95,Information Technology 
+"ORLY 
+",280.81,Consumer Discretionary 
+"OXY 
+",69.32,Energy 
+"OMC 
+",85.17,Consumer Discretionary 
+"OKE 
+",56.56,Energy 
+"ORCL 
+",39.19,Information Technology 
+"PCAR 
+",66.31,Industrials 
+"PH 
+",144.4,Industrials 
+"PDCO 
+",41.21,Health Care 
+"PAYX 
+",61.04,Information Technology 
+"PYPL 
+",41.35,Information Technology 
+"PNR 
+",58.74,Industrials 
+"PBCT 
+",19.29,Financials 
+"PEP 
+",102.74,Consumer Staples 
+"PKI 
+",52.43,Health Care 
+"PRGO 
+",76.46,Health Care 
+"PFE 
+",32.03,Health Care 
+"PCG 
+",61.46,Utilities 
+"PM 
+",93.49,Consumer Staples 
+"PSX 
+",84.13,Energy 
+"PNW 
+",77.89,Utilities 
+"PXD 
+",183.01,Energy 
+"PBI 
+",16.21,Industrials 
+"PNC 
+",116.32,Financials 
+"RL 
+",89.29,Consumer Discretionary 
+"PPG 
+",96.69,Materials 
+"PPL 
+",34.54,Utilities 
+"PX 
+",116.6,Materials 
+"PCLN 
+",1541.86,Consumer Discretionary 
+"PFG 
+",59.48,Financials 
+"PG 
+",84.93,Consumer Staples 
+"PGR 
+",36.35,Financials 
+"PLD 
+",52.85,Real Estate 
+"PRU 
+",105.59,Financials 
+"PEG 
+",44.18,Utilities 
+"PSA 
+",215.6,Real Estate 
+"PHM 
+",19.21,Consumer Discretionary 
+"PVH 
+",93.36,Consumer Discretionary 
+"QRVO 
+",59.17,Information Technology 
+"PWR 
+",34.28,Industrials 
+"QCOM 
+",65.13,Information Technology 
+"DGX 
+",92.96,Health Care 
+"RRC 
+",34.35,Energy 
+"RTN 
+",147.02,Industrials 
+"O 
+",59.78,Real Estate 
+"RHT 
+",73.6,Information Technology 
+"REGN 
+",362.95,Health Care 
+"RF 
+",14.03,Financials 
+"RSG 
+",57.36,Industrials 
+"RAI 
+",58,Consumer Staples 
+"RHI 
+",49.35,Industrials 
+"ROK 
+",139.96,Industrials 
+"COL 
+",89.6,Industrials 
+"ROP 
+",186.91,Industrials 
+"ROST 
+",66.9,Consumer Discretionary 
+"RCL 
+",85.51,Consumer Discretionary 
+"R 
+",75.76,Industrials 
+"CRM 
+",75.78,Information Technology 
+"SCG 
+",72.36,Utilities 
+"SLB 
+",87.48,Energy 
+"SNI 
+",75.34,Consumer Discretionary 
+"STX 
+",37.24,Information Technology 
+"SEE 
+",48.6,Materials 
+"SRE 
+",103.78,Utilities 
+"SHW 
+",286.96,Materials 
+"SIG 
+",82.03,Consumer Discretionary 
+"SPG 
+",186.57,Real Estate 
+"SWKS 
+",79.27,Information Technology 
+"SLG 
+",108.87,Real Estate 
+"SNA 
+",175.2,Consumer Discretionary 
+"SO 
+",49.62,Utilities 
+"LUV 
+",50.38,Industrials 
+"SWN 
+",9.69,Energy 
+"SE 
+",42.19,Energy 
+"SPGI 
+",114.4,Financials 
+"SWK 
+",120.2,Consumer Discretionary 
+"SPLS 
+",9.29,Consumer Discretionary 
+"SBUX 
+",58.45,Consumer Discretionary 
+"STT 
+",80.15,Financials 
+"SRCL 
+",80.51,Industrials 
+"SYK 
+",122.4,Health Care 
+"STI 
+",54.36,Financials 
+"SYMC 
+",26.41,Information Technology 
+"SYF 
+",35.9,Financials 
+"SYY 
+",55.25,Consumer Staples 
+"TROW 
+",73.29,Financials 
+"TGT 
+",66.85,Consumer Discretionary 
+"TEL 
+",69.82,Information Technology 
+"TGNA 
+",21.27,Consumer Discretionary 
+"TDC 
+",28.72,Information Technology 
+"TSO 
+",81.63,Energy 
+"TXN 
+",74.38,Information Technology 
+"TXT 
+",49.09,Industrials 
+"COO 
+",183.01,Health Care 
+"HSY 
+",105.65,Consumer Staples 
+"TRV 
+",118.54,Financials 
+"TMO 
+",144.66,Health Care 
+"TIF 
+",79.94,Consumer Discretionary 
+"TWX 
+",95.11,Consumer Discretionary 
+"TJX 
+",76.68,Consumer Discretionary 
+"TMK 
+",73.81,Financials 
+"TSS 
+",53.79,Information Technology 
+"TSCO 
+",76.41,Consumer Discretionary 
+"TDG 
+",250.89,Industrials 
+"RIG 
+",15.3,Energy 
+"TRIP 
+",52.88,Consumer Discretionary 
+"FOXA 
+",30.27,Consumer Discretionary 
+"FOX 
+",29.52,Consumer Discretionary 
+"TSN 
+",62.74,Consumer Staples 
+"UDR 
+",36.07,Real Estate 
+"ULTA 
+",265.5,Consumer Discretionary 
+"USB 
+",50.56,Financials 
+"UA 
+",25.35,Consumer Discretionary 
+"UAA 
+",29.35,Consumer Discretionary 
+"UNP 
+",103.77,Industrials 
+"UAL 
+",74,Industrials 
+"UNH 
+",157.74,Health Care 
+"UPS 
+",114.96,Industrials 
+"URI 
+",111.02,Industrials 
+"UTX 
+",110.42,Industrials 
+"UHS 
+",113.6,Health Care 
+"UNM 
+",44.49,Financials 
+"URBN 
+",26.98,Consumer Discretionary 
+"VFC 
+",50.9,Consumer Discretionary 
+"VLO 
+",66.75,Energy 
+"VAR 
+",89.78,Health Care 
+"VTR 
+",62.22,Real Estate 
+"VRSN 
+",80.62,Information Technology 
+"VRSK 
+",81.08,Industrials 
+"VZ 
+",52.25,Telecommunications Services 
+"VRTX 
+",82.52,Health Care 
+"VIAB 
+",39.7692,Consumer Discretionary 
+"V 
+",81.59,Information Technology 
+"VNO 
+",106.2,Real Estate 
+"VMC 
+",127.3,Materials 
+"WMT 
+",68.11,Consumer Staples 
+"WBA 
+",84.12,Consumer Staples 
+"DIS 
+",108.16,Consumer Discretionary 
+"WM 
+",69.59,Industrials 
+"WAT 
+",143.1,Health Care 
+"WEC 
+",59.38,Utilities 
+"WFC 
+",54.27,Financials 
+"HCN 
+",67.08,Real Estate 
+"WDC 
+",73.2392,Information Technology 
+"WU 
+",21.85,Information Technology 
+"WRK 
+",51.68,Materials 
+"WY 
+",30.5,Real Estate 
+"WHR 
+",186.01,Consumer Discretionary 
+"WFM 
+",31.21,Consumer Staples 
+"WMB 
+",28.34,Energy 
+"WLTW 
+",126.17,Financials 
+"WYN 
+",77.15,Consumer Discretionary 
+"WYNN 
+",91.98,Consumer Discretionary 
+"XEL 
+",41.33,Utilities 
+"XRX 
+",7.02,Information Technology 
+"XLNX 
+",58.14,Information Technology 
+"XL 
+",37.42,Financials 
+"XYL 
+",48.43,Industrials 
+"YHOO 
+",42.03,Information Technology 
+"YUM 
+",64.36,Consumer Discretionary 
+"ZBH 
+",115.47,Health Care 
+"ZION 
+",42.465,Financials 
+"ZTS 
+",53.3,Health Care 
