@@ -3,7 +3,7 @@
 
 # In[1]:
 
-from faker import *
+from faker import * 
 import sys
 from faker.providers import BaseProvider
 from datetime import datetime,timedelta
