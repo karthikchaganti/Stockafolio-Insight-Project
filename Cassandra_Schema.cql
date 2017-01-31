@@ -1,13 +1,40 @@
-CREATE KEYSPACE finance_news WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 3};
-USE finance_news;
+CREATE KEYSPACE StockPortfolio WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 3};
+USE StockPortfolio;
 
---stock count table
---_batch is generated from batch processing, after each batch run, the real time database is switched from _rts1 to _rts2 and vice versa
---_rts1 is a real time stream that continuously updates after being reset to 0 counts immediately after every switchover
---_web is a copy of the real time stream that gets generated immediately before every switchover
+
+-- All the trades that happen every second. From here the users' latest k trades can be extracted onto the dashboard
+
+CREATE TABLE db_trades_stream (userId uuid,
+userName text,
+tickerName text,
+tickerSector text,
+tickerPrice float,
+tradeQuantity bigint,
+total_val double,
+tradeTime timestamp,
+tradeType text,
+PRIMARY KEY(userId,tickerName,tradeTime))
+
+
+-- User vs Company Portfolio: Contains user id , company stock name, the total no.of. shares and the value along with its sector
+-- userid, tickername, quantity, total value, sector
+-- 123456, GOOG, 254 shares, 1100, information technology
+-- 123456, AAPL, 135 shares, 1256, information technology
+
+CREATE TABLE db_user_portfolio (userId uuid,
+tickerName text,
+tickerQuant bigint,
+tickerValue double,
+tickerSector text,
+PRIMARY KEY(uuId,tickerName))
+
+
+
+
+
+
 CREATE TABLE stock_counts_batch (user text, company text, stock_total int, portfolio_ratio float, contact_limit float, PRIMARY KEY (user, company));
 CREATE TABLE stock_counts_rts1 (user text, company text, stock_total int, portfolio_ratio float, contact_limit float, PRIMARY KEY (user, company));
-CREATE TABLE stock_counts_web (user text, company text, stock_total int, portfolio_ratio float, contact_limit float, PRIMARY KEY (user, company));
 
 CREATE TABLE stock_totals_batch (user text, portfolio_total int, PRIMARY KEY (user));
 CREATE TABLE stock_totals_rts1 (user text, portfolio_total int, PRIMARY KEY (user));

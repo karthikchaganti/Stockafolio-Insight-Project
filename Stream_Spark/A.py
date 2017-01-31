@@ -148,4 +148,4 @@ def process(rdd):
 lines.foreachRDD(process)
 ssc.start()
 ssc.awaitTermination()
-Contact GitHub 
+Contact GitHub
