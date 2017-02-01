@@ -29,7 +29,7 @@ def getSqlContextInstance(sparkContext):
 def process(rdd):
     sqlContext = getSqlContextInstance(rdd.context)
     rowRdd = rdd.map(lambda w: Row(uuid_trade=str(json.loads(w)["uuid_trade"]), userName_trade=json.loads(w)["userName_trade"],
-    timestamp=json.loads(w)["timestamp"] ,traded_stock=json.loads(w)["traded_stock"],traded_stock_price=json.loads(w)["traded_stock_price"],traded_quantity=json.loads(w)["traded_quantity"]
+    timestamp=json.loads(w)["timestamp"] ,traded_stock=json.loads(w)["traded_stock"],traded_stock_price=json.loads(w)["traded_stock_price"],traded_quantity=json.loads(w)["traded_quantity"],
     trade_type=json.loads(w)["trade_type"],traded_stock_sector=json.loads(w)["traded_stock_sector"]))
     df_trades = sqlContext.createDataFrame(rowRdd)
     for row in df_trades.collect():
@@ -47,7 +47,7 @@ def process(rdd):
         # Push the trade to the trade history database
         session.execute(db_pushTrade,(stsp_uuId,stsp_userName,stsp_stockTicker,stsp_stockPrice,stsp_stockVolume,stsp_totalTradeVal,stsp_timestamp,stsp_tradeType))
 
-if __init__ == '__main__'
+if __init__ == "__main__"
     # Spark Context Config
     conf = SparkConf().setAppName conf = SparkConf().setAppName("StockAFolio").set("spark.cores.max", "12")
     sc = SparkContext(conf=conf)

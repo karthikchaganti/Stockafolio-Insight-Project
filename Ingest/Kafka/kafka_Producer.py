@@ -3,7 +3,7 @@
 
 # In[1]:
 
-from faker import * 
+from faker import *
 import sys
 from faker.providers import BaseProvider
 from datetime import datetime,timedelta
@@ -15,6 +15,7 @@ import csv
 import random
 import radar
 import six
+import JSON
 from collections import defaultdict
 from pandas import DataFrame
 from kafka.client import SimpleClient
@@ -42,7 +43,9 @@ class Simulator():
 #---------------------------------------------------------------------------------------------------#
 
     def stream_generator(self):
-        timestamp = datetime.strptime(self.streamTime, "%Y-%m-%d %H:%M:%S")
+        #timestamp = datetime.strptime(self.streamTime, "%Y-%m-%d %H:%M:%S")
+        timestamp = datetime.now()
+        timestamp_str = datetime.strftime(timestamp,"%Y-%m-%d %H:%M:%S")
         while(True):
             singleTrade = []
             for key in (self.dict_stocks_Quandl):
@@ -63,10 +66,12 @@ class Simulator():
             traded_stock_price = self.sp500_realtime_dict.get(traded_stock.rstrip()).get(timestamp)
             trade_type = random.choice(['buy','sold'])
 
-            str_fmt = "{};{};{};{}:{};{};{};{}"
-            singleTrade = str_fmt.format(timestamp,uuid_trade,userName_trade,traded_stock,traded_stock_price,traded_quantity,trade_type,traded_stock_sector)
+            #str_fmt = "{};{};{};{}:{};{};{};{}"
+            #singleTrade = str_fmt.format(timestamp,uuid_trade,userName_trade,traded_stock,traded_stock_price,traded_quantity,trade_type,traded_stock_sector)
+            singleTrade = json.dumps({"timestamp":timestamp_str,"uuid_trade":uuid_trade,"traded_stock":traded_stock,"traded_stock_price":traded_stock_price,
+            "traded_quantity":traded_quantity,"trade_type":trade_type,"traded_stock_sector":traded_stock_sector})
 
-            self.producer.send('StockStream',key = self.partition_key,value=singleTrade)
+            self.producer.send('TradeStream',key = self.partition_key,value=singleTrade)
             timestamp += timedelta(seconds=1)
         return None
 #---------------------------------------------------------------------------------------------------#
@@ -75,7 +80,7 @@ class Simulator():
         return str(uuid.uuid4())
 
     def userList(self):
-        for i in range(1000):
+        for i in range(userCount):
             user_ID = str(uuid.uuid4()) # random
             user_Name =self.faker.name()
             self.userList_dict[user_ID] = user_Name
@@ -86,15 +91,14 @@ if __name__ == "__main__":
 
     args = sys.argv
     ip_addr = str(args[1])
-    userCount = str(args[3])
     partition_key = str(args[2])
-
+    userCount = str(args[3])
 
     # Initiate the user count
     #userCount = 1000
 
     # Read the stocks file downloaded from Quandl
-    stocks_list_Quandl = open('stoc.csv','r')
+    stocks_list_Quandl = open('StocksInfo.csv','r')
     dict_stocks_Quandl = defaultdict(list)
     reader = csv.DictReader(stocks_list_Quandl)
     HEADERS = ["Ticker","Price","Sector"]
