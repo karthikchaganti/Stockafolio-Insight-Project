@@ -54,8 +54,8 @@ if __name__ == "__main__":
     ssc = StreamingContext(sc, 1) # Window 1 seconds
 
     zkQuorum = "localhost:2181"
-    kafka_topic = "TradeStream"
-    kafka_brokers = "ec2-34-198-10-253.compute-1.amazonaws.com:9001"
+    kafka_topic = "TradesTopic"
+    kafka_brokers = "ec2-34-198-10-253.compute-1.amazonaws.com:9092"
     # Connect to Cassandra
     server_EC2 = Cluster(['ec2-34-198-236-106.compute-1.amazonaws.com'])
     session = server_EC2.connect('stockportfolio')
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     db_pushTrade = session.prepare("INSERT INTO db_trades_stream (userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType) VALUES (?,?,?,?,?,?,?,?,?) USING TTL 1036800")
 
     # Kafka Consumer
-    KafkaStream = KafkaUtils.createDirectStream(ssc, [kafka_topic], {"bootstrap_servers":kafka_brokers})
+    KafkaStream = KafkaUtils.createDirectStream(ssc, [kafka_topic], {"bootstrap.servers":kafka_brokers})
     lines = KafkaStream.map(lambda x:x[1])
     lines.foreachRDD(process)
     ssc.start()
