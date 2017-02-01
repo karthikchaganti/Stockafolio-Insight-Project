@@ -65,12 +65,11 @@ if __init__ == '__main__'
     ssc.awaitTermination()
 
     # Connect to Cassandra
-    server_EC2 = Cluster([''])
-    session = server_EC2.connect('')
+    server_EC2 = Cluster(['ec2-34-198-236-106.compute-1.amazonaws.com'])
+    session = server_EC2.connect('StockPortfolio')
     # prepares the session for pushing the latest trades into the database
     db_pushTrade = session.prepare("INSERT INTO db_trades_stream (stsp_uuId,stsp_userName,stsp_stockTicker,stsp_stockPrice,stsp_stockVolume,stsp_totalTradeVal,stsp_timestamp,stsp_tradeType) VALUES (?,?,?,?,?,?,?,?,?) USING TTL 1036800")
 
     lines.foreachRDD(process)
     ssc.start()
     ssc.awaitTermination()
-    
