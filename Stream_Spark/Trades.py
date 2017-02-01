@@ -47,9 +47,9 @@ def process(rdd):
         # Push the trade to the trade history database
         session.execute(db_pushTrade,(stsp_uuId,stsp_userName,stsp_stockTicker,stsp_stockPrice,stsp_stockVolume,stsp_totalTradeVal,stsp_timestamp,stsp_tradeType))
 
-if __init__ == "__main__"
+if __init__ == "__main__":
     # Spark Context Config
-    conf = SparkConf().setAppName conf = SparkConf().setAppName("StockAFolio").set("spark.cores.max", "12")
+    conf = SparkConf().setAppName("StockAFolio").set("spark.cores.max", "12")
     sc = SparkContext(conf=conf)
     ssc = StreamingContext(sc, 1) # Window 1 seconds
 
@@ -63,7 +63,7 @@ if __init__ == "__main__"
     db_pushTrade = session.prepare("INSERT INTO db_trades_stream (stsp_uuId,stsp_userName,stsp_stockTicker,stsp_stockPrice,stsp_stockVolume,stsp_totalTradeVal,stsp_timestamp,stsp_tradeType) VALUES (?,?,?,?,?,?,?,?,?) USING TTL 1036800")
 
     # Kafka Consumer
-    KafkaStream = KafkaUtils.createDirectStream(ssc, [kafka_topic], {"bootstrap_servers"=kafka_brokers,"auto.offset.reset":"latest"})
+    KafkaStream = KafkaUtils.createDirectStream(ssc, [kafka_topic], {"bootstrap_servers":kafka_brokers})
     lines = KafkaStream.map(lambda x:x[1])
     lines.foreachRDD(process)
     ssc.start()

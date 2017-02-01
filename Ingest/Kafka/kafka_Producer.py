@@ -15,7 +15,7 @@ import csv
 import random
 import radar
 import six
-import JSON
+import json
 from collections import defaultdict
 from pandas import DataFrame
 from kafka.client import SimpleClient
@@ -78,7 +78,7 @@ class Simulator():
         return str(uuid.uuid4())
 
     def userList(self):
-        for i in range(userCount):
+        for i in range(int(userCount)):
             user_ID = str(uuid.uuid4()) # random
             user_Name =self.faker.name()
             self.userList_dict[user_ID] = user_Name
