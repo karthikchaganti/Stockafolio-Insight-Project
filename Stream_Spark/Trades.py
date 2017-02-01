@@ -45,8 +45,10 @@ def process(rdd):
         tickerSector = row.traded_stock_sector
         tickerPrice = row.traded_stock_price
         tradeQuantity = row.traded_quantity
-        total_val = tickerPrice * tradeQuantity
-
+        if tickerPrice != None:	
+           total_val = tickerPrice * tradeQuantity
+        else:
+           total_val = 0
         # Push the trade to the trade history database
         session.execute(db_pushTrade,(userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType))
 
@@ -57,7 +59,7 @@ if __name__ == "__main__":
     ssc = StreamingContext(sc, 1) # Window 1 seconds
 
     zkQuorum = "localhost:2181"
-    kafka_topic = "StreamStock"
+    kafka_topic = "NewTopic"
     kafka_brokers = "ec2-34-198-10-253.compute-1.amazonaws.com:9092"
     # Connect to Cassandra
     server_EC2 = Cluster(['ec2-34-198-236-106.compute-1.amazonaws.com'])
