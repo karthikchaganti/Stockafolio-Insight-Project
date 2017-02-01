@@ -19,6 +19,7 @@ from cqlengine.models import Model
 from cqlengine.management import sync_table
 from datetime import datetime
 import json
+import uuid
 
 
 def getSqlContextInstance(sparkContext):
@@ -32,11 +33,13 @@ def process(rdd):
     timestamp=json.loads(w)["timestamp"] ,traded_stock=json.loads(w)["traded_stock"],traded_stock_price=json.loads(w)["traded_stock_price"],traded_quantity=json.loads(w)["traded_quantity"],
     trade_type=json.loads(w)["trade_type"],traded_stock_sector=json.loads(w)["traded_stock_sector"]))
     df_trades = sqlContext.createDataFrame(rowRdd)
+    print(df_trades)
     for row in df_trades.collect():
         stsp_timestamp  = row.timestamp.encode('utf-8')
         tradeTime  = datetime.strptime(stsp_timestamp, "%Y-%m-%d %H:%M:%S")
         userName = row.userName_trade
         userId = row.uuid_trade
+	userId = uuid.UUID(userId)
         tradeType = row.trade_type
         tickerName = row.traded_stock
         tickerSector = row.traded_stock_sector
