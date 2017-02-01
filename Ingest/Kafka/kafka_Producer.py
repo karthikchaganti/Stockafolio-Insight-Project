@@ -66,7 +66,7 @@ class Simulator():
             timestamp_str = datetime.strftime(timestamp,"%Y-%m-%d %H:%M:%S")
             #str_fmt = "{};{};{};{}:{};{};{};{}"
             #singleTrade = str_fmt.format(timestamp,uuid_trade,userName_trade,traded_stock,traded_stock_price,traded_quantity,trade_type,traded_stock_sector)
-            singleTrade = json.dumps({"timestamp":timestamp_str,"uuid_trade":uuid_trade,"traded_stock":traded_stock,"traded_stock_price":traded_stock_price,
+            singleTrade = json.dumps({"timestamp":timestamp_str,"uuid_trade":uuid_trade,"traded_stock":traded_stock.rstrip(),"traded_stock_price":traded_stock_price,
             "traded_quantity":traded_quantity,"trade_type":trade_type,"traded_stock_sector":traded_stock_sector})
 
             self.producer.send('TradesTopic',key = self.partition_key,value=singleTrade)
