@@ -69,7 +69,7 @@ class Simulator():
             singleTrade = json.dumps({"timestamp":timestamp_str,"uuid_trade":uuid_trade,"userName_trade":userName_trade,"traded_stock":traded_stock.rstrip(),"traded_stock_price":traded_stock_price,
             "traded_quantity":traded_quantity,"trade_type":trade_type,"traded_stock_sector":traded_stock_sector})
 
-            self.producer.send('TradesTopic',key = self.partition_key,value=singleTrade)
+            self.producer.send('StreamStock',key = self.partition_key,value=singleTrade)
             timestamp += timedelta(seconds=1)
         return None
 #---------------------------------------------------------------------------------------------------#
