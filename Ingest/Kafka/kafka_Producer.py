@@ -39,13 +39,11 @@ class Simulator():
         self.dict_stocks_Quandl = dict_stocks_Quandl
         self.userList_dict = {}
         self.sp500_realtime_dict={}
-        self.streamTime = '2017-01-10 09:48:49'
 #---------------------------------------------------------------------------------------------------#
 
     def stream_generator(self):
         #timestamp = datetime.strptime(self.streamTime, "%Y-%m-%d %H:%M:%S")
         timestamp = datetime.now()
-        timestamp_str = datetime.strftime(timestamp,"%Y-%m-%d %H:%M:%S")
         while(True):
             singleTrade = []
             for key in (self.dict_stocks_Quandl):
@@ -65,13 +63,13 @@ class Simulator():
             traded_quantity = random.randint(5,150)
             traded_stock_price = self.sp500_realtime_dict.get(traded_stock.rstrip()).get(timestamp)
             trade_type = random.choice(['buy','sold'])
-
+            timestamp_str = datetime.strftime(timestamp,"%Y-%m-%d %H:%M:%S")
             #str_fmt = "{};{};{};{}:{};{};{};{}"
             #singleTrade = str_fmt.format(timestamp,uuid_trade,userName_trade,traded_stock,traded_stock_price,traded_quantity,trade_type,traded_stock_sector)
             singleTrade = json.dumps({"timestamp":timestamp_str,"uuid_trade":uuid_trade,"traded_stock":traded_stock,"traded_stock_price":traded_stock_price,
             "traded_quantity":traded_quantity,"trade_type":trade_type,"traded_stock_sector":traded_stock_sector})
 
-            self.producer.send('TradeStream',key = self.partition_key,value=singleTrade)
+            self.producer.send('TradesTopic',key = self.partition_key,value=singleTrade)
             timestamp += timedelta(seconds=1)
         return None
 #---------------------------------------------------------------------------------------------------#
