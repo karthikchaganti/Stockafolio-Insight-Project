@@ -52,35 +52,55 @@ def sparkRun(rdd):
         # Push the trade to the trade history database
         session.execute(db_pushTrade,(userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType))
 
-        # If the trade is a buy/sell --> quantity is positive/negative respectively
-        if tradeType == 'sell':
-            tradeQuantity = -(tradeQuantity)
+        # Get all the values and counts from the database for the uses below
+        row_val = session.execute(ses_val, (userID,tickerName))
+        row_cnt =  session.execute(ses_count, (userID))
+        row_prop = session.execute(ses_prop,(userId,tickerSector))
 
-        #
+        row_stck_quant = 0 if len(row_val)) == 0 else row_portfolio_vals[0].tickerQuant
+        row_stck_value = 0 if len(row_val)) == 0 else row_portfolio_vals[0].tickerValue
+        row_portfolio_count = 0 if len(row_cnt)) == 0 else row_portfolio_vals[0].portfolio_count
+        row_portfolio_value = 0 if len(row_cnt)) == 0 else row_portfolio_vals[0].portfolio_value
+        row_sec_prop = 0 if len(row_prop)) == 0 else row_portfolio_vals[0].sec_prop
 
-    ########---*********************************************************************************---#######
-    def db_getValue(table):
-        value = "SELECT tickerQuant, tickerValue FROM " + table + "WHERE userId = ? AND tickerName = ?"
-        ses_val = session.prepare(value)
-        return ses_val
+        if(trade_type == 'SOLD'):
+            tradeQuantity = -(tradeQuantity) # if the trade is sell, then negate the volume as it needs to be subtracted
 
-    def db_getCount(table):
-        count = "SELECT portfolio_count, portfolio_value FROM" + table + "WHERE userId = ?"
-        ses_count = session.prepare(count)
-        return ses_count
+        if row_stck_quant < 0:                                  # user has taken shorts on this stock.
+            if tradeQuantity <0:
+                row_portfolio_count = row_portfolio_count + abs(tradeQuantity)                # since the user sold more shorts, it increases their portfolio
+            else:
+                # since he purchased new shares on this stock, see if these purchased stocks cover the shorts                                           # if he rather purchased
+                new_stock = row_stck_quant + tradeQuantity
+                if new_stock <= 0: # if not, less shares are compensated for the shorts and hence reduce the same no. from the portfolio
+                    row_portfolio_count = tradeQuantity - abs(tradeQuantity)
+                else:
+                    row_portfolio_count = tradeQuantity - abs(row_stck_quant) + (row_stck_quant + tradeQuantity)
+        elif row_stck_quant>0:
+            if tradeQuantity >=0:
+                row_portfolio_count = row_portfolio_count+tradeQuantity
+            else:
+                new_stock = row_stck_quant+tradeQuantity
+                if new_stock >=0:
+                    row_portfolio_count = row_portfolio_count+tradeQuantity
+                else:
+                    subtract_existing = -tradeQuantity
+                    row_portfolio_count = row_portfolio_count-row_stck_quant+((subtract_existing - row_stck_quant))
+        else:
+            row_portfolio_count = row_portfolio_count + abs(tradeQuantity)
 
-    def db_getSectorProp(table):
-        proportion = "SELECT sec_prop FROM" + table + "WHERE userId = ? AND tickerSector = ?"
-        ses_prop = session.prepare(proportion)
-        return ses_prop
+        # Update the user's stock quantity
+        row_stck_quant = row_stck_quant + tradeQuantity
+        row_stck_value = row_stck_value + (tradeQuantity * tickerPrice)
+        row_portfolio_value = row_portfolio_value + (tradeQuantity * tickerPrice)
+        if row_stck_value !=0 and row_portfolio_value!=0:
+            row_sec_prop = abs(row_stck_value) / float(row_portfolio_value)
+        else:
+            row_sec_prop = 0 + row_sec_prop
 
-    def portfolioCounter(tradeVol,existingVol,totalVol,typeOfTrade):
-        if existingVol > 0:
-            if tradeVol >=0
-
-
-
-
+        session.execute(db_pushTotalCount,(userId,row_portfolio_count,row_portfolio_value))
+        session.execute(db_pushStockCount,(userId,tickerName,row_stck_quant,row_stck_value))
+        session.execute(db_user_sector,(userId,row_sec_prop,tickerSector))
 
     ########---*********************************************************************************---#######
 if __name__ == "__main__":
@@ -98,14 +118,20 @@ if __name__ == "__main__":
     session = server_EC2.connect('stockportfolio')
     ########---*********************************************************************************---#######
     # Cassandra Session Prepares
-    db_portfolio_values = db_getValue("db_user_portfolio")
-    db_portfolio_count = db_getCount("db_user_portCount")
-    db_sector_prop = db_getSectorProp("db_user_sector")
-    db_pushTrade = session.prepare("INSERT INTO db_trades_stream (userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType) VALUES (?,?,?,?,?,?,?,?,?) USING TTL 1036800")
-    ########---*********************************************************************************---#######
+    value_query = "SELECT tickerQuant, tickerValue FROM " + table + "WHERE userId = ? AND tickerName = ?"
+    ses_val = session.prepare(value)
+
+    count_query = "SELECT portfolio_count, portfolio_value FROM" + table + "WHERE userId = ?"
+    ses_count = session.prepare(count)
+
+    proportion_query = "SELECT sec_prop FROM" + table + "WHERE userId = ? AND tickerSector = ?"
+    ses_prop = session.prepare(proportion)
+
     # prepares the session for pushing the latest trades into the database
     db_pushTrade = session.prepare("INSERT INTO db_trades_stream (userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType) VALUES (?,?,?,?,?,?,?,?,?) USING TTL 1036800")
-
+    db_pushTotalCount = session.prepare("INSERT INTO db_user_portCount(userId,portfolio_count,portfolio_value) VALUES (?,?,?))
+    db_pushStockCount = session.prepare("INSERT INTO db_user_portfolio(userId,tickerName,tickerQuant,tickerValue) VALUES (?,?,?,?))
+    db_pushStockCount = session.prepare("INSERT INTO db_user_sector(userId,sec_prop,tickerSector) VALUES (?,?,?))
     # Kafka Consumer
     KafkaStream = KafkaUtils.createDirectStream(ssc, [kafka_topic], {"bootstrap.servers":kafka_brokers})
     messages = KafkaStream.map(lambda x:x[1])
