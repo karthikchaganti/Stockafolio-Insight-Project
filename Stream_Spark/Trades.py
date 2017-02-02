@@ -59,9 +59,9 @@ def sparkRun(rdd):
 
         row_stck_quant = 0 if len(row_val) == 0 else row_portfolio_vals[0].tickerQuant
         row_stck_value = 0 if len(row_val) == 0 else row_portfolio_vals[0].tickerValue
-        row_portfolio_count = 0 if len(row_cnt)) == 0 else row_portfolio_vals[0].portfolio_count
-        row_portfolio_value = 0 if len(row_cnt)) == 0 else row_portfolio_vals[0].portfolio_value
-        row_sec_prop = 0 if len(row_prop)) == 0 else row_portfolio_vals[0].sec_prop
+        row_portfolio_count = 0 if len(row_cnt) == 0 else row_portfolio_vals[0].portfolio_count
+        row_portfolio_value = 0 if len(row_cnt)== 0 else row_portfolio_vals[0].portfolio_value
+        row_sec_prop = 0 if len(row_prop) == 0 else row_portfolio_vals[0].sec_prop
 
         if(trade_type == 'SOLD'):
             tradeQuantity = -(tradeQuantity) # if the trade is sell, then negate the volume as it needs to be subtracted
@@ -118,13 +118,13 @@ if __name__ == "__main__":
     session = server_EC2.connect('stockportfolio')
     ########---*********************************************************************************---#######
     # Cassandra Session Prepares
-    value_query = "SELECT tickerQuant, tickerValue FROM " + db_user_portfolio + "WHERE userId = ? AND tickerName = ?"
+    value_query = "SELECT tickerQuant, tickerValue FROM db_user_portfolio WHERE userId = ? AND tickerName = ?"
     ses_val = session.prepare(value)
 
-    count_query = "SELECT portfolio_count, portfolio_value FROM" + db_user_portCount + "WHERE userId = ?"
+    count_query = "SELECT portfolio_count, portfolio_value FROM db_user_portCount WHERE userId = ?"
     ses_count = session.prepare(count)
 
-    proportion_query = "SELECT sec_prop FROM" + db_user_sector + "WHERE userId = ? AND tickerSector = ?"
+    proportion_query = "SELECT sec_prop FROM db_user_sector WHERE userId = ? AND tickerSector = ?"
     ses_prop = session.prepare(proportion)
 
     # prepares the session for pushing the latest trades into the database
