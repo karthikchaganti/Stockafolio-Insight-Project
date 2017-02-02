@@ -93,14 +93,14 @@ def sparkRun(rdd):
         row_stck_quant = row_stck_quant + tradeQuantity
         row_stck_value = row_stck_value + (tradeQuantity * tickerPrice)
         row_portfolio_value = row_portfolio_value + (tradeQuantity * tickerPrice)
-        if row_stck_value !=0 and row_portfolio_value!=0:
-            row_sec_prop = abs(row_stck_value) / float(row_portfolio_value)
-        else:
-            row_sec_prop = 0 + row_sec_prop
+        #if row_stck_value !=0 and row_portfolio_value!=0:
+            #row_sec_prop = abs(row_stck_value) / float(row_portfolio_value)
+        #else:
+            #row_sec_prop = 0 + row_sec_prop
 
         session.execute(db_pushTotalCount,(userId,row_portfolio_count,row_portfolio_value))
         session.execute(db_pushStockCount,(userId,tickerName,row_stck_quant,row_stck_value))
-        session.execute(db_user_sector,(userId,row_sec_prop,tickerSector))
+        #session.execute(db_user_sector,(userId,row_sec_prop,tickerSector))
 
     ########---*********************************************************************************---#######
 if __name__ == "__main__":
@@ -124,14 +124,14 @@ if __name__ == "__main__":
     count_query = "SELECT portfolio_count, portfolio_value FROM db_user_portCount WHERE userId = ?"
     ses_count = session.prepare(count_query)
 
-    proportion_query = "SELECT sec_prop FROM db_user_sector WHERE userId = ? AND tickerSector = ?"
-    ses_prop = session.prepare(proportion_query)
+    #proportion_query = "SELECT sec_prop FROM db_user_sector WHERE userId = ? AND tickerSector = ?"
+    #ses_prop = session.prepare(proportion_query)
 
     # prepares the session for pushing the latest trades into the database
     db_pushTrade = session.prepare("INSERT INTO db_trades_stream (userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType) VALUES (?,?,?,?,?,?,?,?,?) USING TTL 1036800")
     db_pushTotalCount = session.prepare("INSERT INTO db_user_portCount(userId,portfolio_count,portfolio_value) VALUES (?,?,?)")
     db_pushStockCount = session.prepare("INSERT INTO db_user_portfolio(userId,tickerName,tickerQuant,tickerValue) VALUES (?,?,?,?)")
-    db_pushStockCount = session.prepare("INSERT INTO db_user_sector(userId,sec_prop,tickerSector) VALUES (?,?,?)")
+    #db_pushStockCount = session.prepare("INSERT INTO db_user_sector(userId,sec_prop,tickerSector) VALUES (?,?,?)")
     # Kafka Consumer
     KafkaStream = KafkaUtils.createDirectStream(ssc, [kafka_topic], {"bootstrap.servers":kafka_brokers})
     messages = KafkaStream.map(lambda x:x[1])
