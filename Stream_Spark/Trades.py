@@ -119,13 +119,13 @@ if __name__ == "__main__":
     ########---*********************************************************************************---#######
     # Cassandra Session Prepares
     value_query = "SELECT tickerQuant, tickerValue FROM db_user_portfolio WHERE userId = ? AND tickerName = ?"
-    ses_val = session.prepare(value)
+    ses_val = session.prepare(value_query)
 
     count_query = "SELECT portfolio_count, portfolio_value FROM db_user_portCount WHERE userId = ?"
-    ses_count = session.prepare(count)
+    ses_count = session.prepare(count_query)
 
     proportion_query = "SELECT sec_prop FROM db_user_sector WHERE userId = ? AND tickerSector = ?"
-    ses_prop = session.prepare(proportion)
+    ses_prop = session.prepare(proportion_query)
 
     # prepares the session for pushing the latest trades into the database
     db_pushTrade = session.prepare("INSERT INTO db_trades_stream (userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType) VALUES (?,?,?,?,?,?,?,?,?) USING TTL 1036800")
