@@ -57,8 +57,8 @@ def sparkRun(rdd):
         row_cnt =  session.execute(ses_count, (userID))
         row_prop = session.execute(ses_prop,(userId,tickerSector))
 
-        row_stck_quant = 0 if len(row_val)) == 0 else row_portfolio_vals[0].tickerQuant
-        row_stck_value = 0 if len(row_val)) == 0 else row_portfolio_vals[0].tickerValue
+        row_stck_quant = 0 if len(row_val) == 0 else row_portfolio_vals[0].tickerQuant
+        row_stck_value = 0 if len(row_val) == 0 else row_portfolio_vals[0].tickerValue
         row_portfolio_count = 0 if len(row_cnt)) == 0 else row_portfolio_vals[0].portfolio_count
         row_portfolio_value = 0 if len(row_cnt)) == 0 else row_portfolio_vals[0].portfolio_value
         row_sec_prop = 0 if len(row_prop)) == 0 else row_portfolio_vals[0].sec_prop
@@ -118,20 +118,20 @@ if __name__ == "__main__":
     session = server_EC2.connect('stockportfolio')
     ########---*********************************************************************************---#######
     # Cassandra Session Prepares
-    value_query = "SELECT tickerQuant, tickerValue FROM " + table + "WHERE userId = ? AND tickerName = ?"
+    value_query = "SELECT tickerQuant, tickerValue FROM " + db_user_portfolio + "WHERE userId = ? AND tickerName = ?"
     ses_val = session.prepare(value)
 
-    count_query = "SELECT portfolio_count, portfolio_value FROM" + table + "WHERE userId = ?"
+    count_query = "SELECT portfolio_count, portfolio_value FROM" + db_user_portCount + "WHERE userId = ?"
     ses_count = session.prepare(count)
 
-    proportion_query = "SELECT sec_prop FROM" + table + "WHERE userId = ? AND tickerSector = ?"
+    proportion_query = "SELECT sec_prop FROM" + db_user_sector + "WHERE userId = ? AND tickerSector = ?"
     ses_prop = session.prepare(proportion)
 
     # prepares the session for pushing the latest trades into the database
     db_pushTrade = session.prepare("INSERT INTO db_trades_stream (userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType) VALUES (?,?,?,?,?,?,?,?,?) USING TTL 1036800")
-    db_pushTotalCount = session.prepare("INSERT INTO db_user_portCount(userId,portfolio_count,portfolio_value) VALUES (?,?,?))
-    db_pushStockCount = session.prepare("INSERT INTO db_user_portfolio(userId,tickerName,tickerQuant,tickerValue) VALUES (?,?,?,?))
-    db_pushStockCount = session.prepare("INSERT INTO db_user_sector(userId,sec_prop,tickerSector) VALUES (?,?,?))
+    db_pushTotalCount = session.prepare("INSERT INTO db_user_portCount(userId,portfolio_count,portfolio_value) VALUES (?,?,?)")
+    db_pushStockCount = session.prepare("INSERT INTO db_user_portfolio(userId,tickerName,tickerQuant,tickerValue) VALUES (?,?,?,?)")
+    db_pushStockCount = session.prepare("INSERT INTO db_user_sector(userId,sec_prop,tickerSector) VALUES (?,?,?)")
     # Kafka Consumer
     KafkaStream = KafkaUtils.createDirectStream(ssc, [kafka_topic], {"bootstrap.servers":kafka_brokers})
     messages = KafkaStream.map(lambda x:x[1])
