@@ -53,15 +53,15 @@ def sparkRun(rdd):
         session.execute(db_pushTrade,(userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType))
 
         # Get all the values and counts from the database for the uses below
-        row_val = session.execute(ses_val, (userID,tickerName))
-        row_cnt =  session.execute(ses_count, (userID))
-        row_prop = session.execute(ses_prop,(userId,tickerSector))
+        row_val = session.execute(ses_val, (userId,tickerName))
+        row_cnt =  session.execute(ses_count, (userId))
+        #row_prop = session.execute(ses_prop,(userId,tickerSector))
 
-        row_stck_quant = 0 if len(row_val) == 0 else row_portfolio_vals[0].tickerQuant
-        row_stck_value = 0 if len(row_val) == 0 else row_portfolio_vals[0].tickerValue
-        row_portfolio_count = 0 if len(row_cnt) == 0 else row_portfolio_vals[0].portfolio_count
-        row_portfolio_value = 0 if len(row_cnt)== 0 else row_portfolio_vals[0].portfolio_value
-        row_sec_prop = 0 if len(row_prop) == 0 else row_portfolio_vals[0].sec_prop
+        row_stck_quant = 0 if len(row_val) == 0 else row_val[0].tickerQuant
+        row_stck_value = 0 if len(row_val) == 0 else row_val[0].tickerValue
+        row_portfolio_count = 0 if len(row_cnt) == 0 else row_cnt[0].portfolio_count
+        row_portfolio_value = 0 if len(row_cnt)== 0 else row_cnt[0].portfolio_value
+        #row_sec_prop = 0 if len(row_prop) == 0 else row_portfolio_vals[0].sec_prop
 
         if(trade_type == 'SOLD'):
             tradeQuantity = -(tradeQuantity) # if the trade is sell, then negate the volume as it needs to be subtracted
