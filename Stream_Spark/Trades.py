@@ -22,6 +22,17 @@ import json
 import uuid
 
 
+def st_getcounter(table):
+        value_query = "SELECT tickerQuant, tickerValue FROM" + table + "WHERE userId = ? AND tickerName = ?"
+        st_value_query = session.prepare(value_query)
+        return st_value_query
+
+def st_getcounter1(table):
+        count_query = "SELECT portfolio_count, portfolio_value FROM" + table + "WHERE userId = ?"
+        st_count_query = session.prepare(count_query)
+        return st_count_query
+
+
 def getSqlContextInstance(sparkContext):
     if ('sqlContextSingletonInstance' not in globals()):
         globals()['sqlContextSingletonInstance'] = SQLContext(sparkContext)
@@ -53,8 +64,8 @@ def sparkRun(rdd):
         session.execute(db_pushTrade,(userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType))
 
         # Get all the values and counts from the database for the uses below
-        row_val = session.execute(ses_val, (userId,tickerName))
-        row_cnt =  session.execute(ses_count, (userId))
+        row_val = session.execute(ses_val,(userId,tickerName, ))
+        row_cnt =  session.execute(ses_count,(userId, ))
         #row_prop = session.execute(ses_prop,(userId,tickerSector))
 
         row_stck_quant = 0 if len(row_val) == 0 else row_val[0].tickerQuant
@@ -117,13 +128,11 @@ if __name__ == "__main__":
     server_EC2 = Cluster(['ec2-34-198-236-106.compute-1.amazonaws.com'])
     session = server_EC2.connect('stockportfolio')
     ########---*********************************************************************************---#######
-    # Cassandra Session Prepares
-    value_query = "SELECT tickerQuant, tickerValue FROM db_user_portfolio WHERE userId = ? AND tickerName = ?"
-    ses_val = session.prepare(value_query)
 
-    count_query = "SELECT portfolio_count, portfolio_value FROM db_user_portCount WHERE userId = ?"
-    ses_count = session.prepare(count_query)
 
+
+    ses_val = st_getcounter("db_user_portfolio")
+    ses_count = st_getcounter1("db_user_portCount")
     #proportion_query = "SELECT sec_prop FROM db_user_sector WHERE userId = ? AND tickerSector = ?"
     #ses_prop = session.prepare(proportion_query)
 
