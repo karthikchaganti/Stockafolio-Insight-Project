@@ -23,12 +23,12 @@ import uuid
 
 
 def st_getcounter(table):
-        value_query = "SELECT tickerQuant, tickerValue FROM" + table + "WHERE userId = ? AND tickerName = ?"
+        value_query = "SELECT tickerQuant, tickerValue FROM " + table + " WHERE userId = ? AND tickerName = ?"
         st_value_query = session.prepare(value_query)
         return st_value_query
 
 def st_getcounter1(table):
-        count_query = "SELECT portfolio_count, portfolio_value FROM" + table + "WHERE userId = ?"
+        count_query = "SELECT portfolio_count, portfolio_value FROM " + table + " WHERE userId = ?"
         st_count_query = session.prepare(count_query)
         return st_count_query
 
