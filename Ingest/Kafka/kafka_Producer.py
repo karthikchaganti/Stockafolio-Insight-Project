@@ -69,7 +69,7 @@ class Simulator():
             singleTrade = json.dumps({"timestamp":timestamp_str,"uuid_trade":uuid_trade,"userName_trade":userName_trade,"traded_stock":traded_stock.rstrip(),"traded_stock_price":traded_stock_price,
             "traded_quantity":traded_quantity,"trade_type":trade_type,"traded_stock_sector":traded_stock_sector})
 
-            self.producer.send('NewTopic',key = self.partition_key,value=singleTrade)
+            self.producer.send('NewTopic',value=singleTrade)
             timestamp += timedelta(seconds=1)
         return None
 #---------------------------------------------------------------------------------------------------#
@@ -78,7 +78,7 @@ class Simulator():
         return str(uuid.uuid4())
 
     def userList(self):
-        for i in range(int(userCount)):
+        for i in range(int(self.userCount)):
             user_ID = str(uuid.uuid4()) # random
             user_Name =self.faker.name()
             self.userList_dict[user_ID] = user_Name

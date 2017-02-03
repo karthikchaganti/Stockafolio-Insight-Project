@@ -50,31 +50,31 @@ def sparkRun(rdd):
         tradeTime  = datetime.strptime(stsp_timestamp, "%Y-%m-%d %H:%M:%S")
         userName = row.userName_trade
         userId = row.uuid_trade
-	    userId = uuid.UUID(userId)
+        userId = uuid.UUID(userId)
         tradeType = row.trade_type
         tickerName = row.traded_stock
         tickerSector = row.traded_stock_sector
         tickerPrice = row.traded_stock_price
         tradeQuantity = row.traded_quantity
-        if tickerPrice != None:
-           total_val = tickerPrice * tradeQuantity
-        else:
-           total_val = 0
+        tickerPrice = 0 if tickerPrice == None else tickerPrice
+        total_val = tickerPrice * tradeQuantity
         # Push the trade to the trade history database
         session.execute(db_pushTrade,(userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType))
 
         # Get all the values and counts from the database for the uses below
         row_val = session.execute(ses_val,(userId,tickerName, ))
         row_cnt =  session.execute(ses_count,(userId, ))
+        #with open('log.txt', 'a') as f:
+            #f.write(row_val)
         #row_prop = session.execute(ses_prop,(userId,tickerSector))
 
-        row_stck_quant = 0 if len(row_val) == 0 else row_val[0].tickerQuant
-        row_stck_value = 0 if len(row_val) == 0 else row_val[0].tickerValue
-        row_portfolio_count = 0 if len(row_cnt) == 0 else row_cnt[0].portfolio_count
-        row_portfolio_value = 0 if len(row_cnt)== 0 else row_cnt[0].portfolio_value
+        row_stck_quant = 0 if not row_val else row_val[0].tickerquant
+        row_stck_value = 0 if not row_val else row_val[0].tickervalue
+        row_portfolio_count = 0 if not row_cnt else row_cnt[0].portfolio_count
+        row_portfolio_value = 0 if not row_cnt else row_cnt[0].portfolio_value
         #row_sec_prop = 0 if len(row_prop) == 0 else row_portfolio_vals[0].sec_prop
 
-        if(trade_type == 'SOLD'):
+        if(tradeType == 'SOLD'):
             tradeQuantity = -(tradeQuantity) # if the trade is sell, then negate the volume as it needs to be subtracted
 
         if row_stck_quant < 0:                                  # user has taken shorts on this stock.
@@ -122,7 +122,7 @@ if __name__ == "__main__":
 
     zkQuorum = "localhost:2181"
     kafka_topic = "NewTopic"
-    kafka_brokers = "ec2-34-198-10-253.compute-1.amazonaws.com:9092"
+    kafka_brokers = "ec2-34-199-79-38.compute-1.amazonaws.com:9092"
     ########---*********************************************************************************---#######
     # Connect to Cassandra
     server_EC2 = Cluster(['ec2-34-198-236-106.compute-1.amazonaws.com'])
