@@ -32,10 +32,8 @@ portfolio_count bigint,
 portfolio_value double,
 PRIMARY KEY(userId));
 
-CREATE TABLE db_user_sector (userId uuid,
-sec_prop float,
-tickerSector text,
-PRIMARY KEY(userId,sec_prop)) WITH CLUSTERING ORDER BY (sec_prop DESC);
+CREATE TABLE db_user_sector (userId uuid,sec_prop float,
+  tickerSector text, PRIMARY KEY(userId,sec_prop,tickerSector))
 
 
 --CREATE TABLE stock_counts_batch (user text, company text, stock_total int, portfolio_ratio float, contact_limit float, PRIMARY KEY (user, company));
