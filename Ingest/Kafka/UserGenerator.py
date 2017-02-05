@@ -16,7 +16,7 @@ class UserGen():
             user_ID = str(uuid.uuid4()) # random
             user_Name =self.faker.name()
             self.userList_dict[user_ID] = user_Name
-            pickle.dump(userLocDict, output)
+            pickle.dump(userList_dict, output)
             output.close()
 
 if __name__ == "main":
