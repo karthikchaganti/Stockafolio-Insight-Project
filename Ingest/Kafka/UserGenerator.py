@@ -7,9 +7,9 @@ from faker import Faker
 class UserGen():
 
     def __init__(self,userCount):
-    self.userCount = userCount
-    fake = Faker()
-    self.userList_dict = {}
+        self.userCount = userCount
+        fake = Faker()
+        self.userList_dict = {}
 
     def userList(self):
         for i in range(int(self.userCount)):
