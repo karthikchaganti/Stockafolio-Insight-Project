@@ -6,8 +6,7 @@
 from faker import *
 import sys
 from faker.providers import BaseProvider
-from datetime import datetime,timedelta
-import time
+from datetime import datetime,timedelta,time,date
 import uuid
 import traceback
 import subprocess
@@ -20,7 +19,7 @@ from collections import defaultdict
 from pandas import DataFrame
 from kafka.client import SimpleClient
 from kafka.producer import KeyedProducer
-
+import time as time2
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
 
@@ -42,10 +41,11 @@ class Simulator():
 #---------------------------------------------------------------------------------------------------#
 
     def stream_generator(self):
-        #timestamp = datetime.strptime(self.streamTime, "%Y-%m-%d %H:%M:%S")
-        timestamp = datetime.now()
+
+        timestamp = datetime.combine(date.today(),time(10,00,00))
+        endtime = time(15,59,59)
         while(True):
-            singleTrade = []
+
             for key in (self.dict_stocks_Quandl):
                 ticker_curr_stream = key
                 sector_curr_stream = dict_stocks_Quandl[key][0].get('Sector')
@@ -56,21 +56,27 @@ class Simulator():
                     rand_price_stock = random.gauss(price_stock,(price_stock*0.03))
 
                 self.sp500_realtime_dict[ticker_curr_stream.rstrip()] = {timestamp:rand_price_stock}
+                trader_num = random.randint(20000,50000)
+            for j in range(trader_num):
+                singleTrade = []
+                uuid_trade,userName_trade = random.choice(list(self.userList_dict.items()))
+                traded_stock,trade_meta_list = random.choice(list(dict_stocks_Quandl.items()))
+                traded_stock_sector = trade_meta_list[0].get('Sector')
+                traded_quantity = random.randint(500,2000)
+                traded_stock_price = self.sp500_realtime_dict.get(traded_stock.rstrip()).get(timestamp)
+                trade_type = random.choice(['buy','sold'])
+                timestamp_str = datetime.strftime(timestamp,"%Y-%m-%d %H:%M:%S")
+                #str_fmt = "{};{};{};{}:{};{};{};{}"
+                #singleTrade = str_fmt.format(timestamp,uuid_trade,userName_trade,traded_stock,traded_stock_price,traded_quantity,trade_type,traded_stock_sector)
+                singleTrade = json.dumps({"timestamp":timestamp_str,"uuid_trade":uuid_trade,"userName_trade":userName_trade,"traded_stock":traded_stock.rstrip(),"traded_stock_price":traded_stock_price,
+                "traded_quantity":traded_quantity,"trade_type":trade_type,"traded_stock_sector":traded_stock_sector})
 
-            uuid_trade,userName_trade = random.choice(list(self.userList_dict.items()))
-            traded_stock,trade_meta_list = random.choice(list(dict_stocks_Quandl.items()))
-            traded_stock_sector = trade_meta_list[0].get('Sector')
-            traded_quantity = random.randint(5,150)
-            traded_stock_price = self.sp500_realtime_dict.get(traded_stock.rstrip()).get(timestamp)
-            trade_type = random.choice(['buy','sold'])
-            timestamp_str = datetime.strftime(timestamp,"%Y-%m-%d %H:%M:%S")
-            #str_fmt = "{};{};{};{}:{};{};{};{}"
-            #singleTrade = str_fmt.format(timestamp,uuid_trade,userName_trade,traded_stock,traded_stock_price,traded_quantity,trade_type,traded_stock_sector)
-            singleTrade = json.dumps({"timestamp":timestamp_str,"uuid_trade":uuid_trade,"userName_trade":userName_trade,"traded_stock":traded_stock.rstrip(),"traded_stock_price":traded_stock_price,
-            "traded_quantity":traded_quantity,"trade_type":trade_type,"traded_stock_sector":traded_stock_sector})
-
-            self.producer.send('NewTopic',value=singleTrade)
+                self.producer.send('NewTopic',value=singleTrade)
             timestamp += timedelta(seconds=1)
+            if(datetime.time(timestamp) > endtime):
+                timestamp += timedelta(days=1)
+                timestamp = datetime.combine(timestamp,time(10,0,0))
+            time2.sleep(1)
         return None
 #---------------------------------------------------------------------------------------------------#
     def gen_UniqueId(self):
