@@ -22,6 +22,7 @@ from kafka.producer import KeyedProducer
 import time as time2
 from kafka import KafkaProducer
 from kafka.errors import KafkaError
+from boto.s3.connection import S3Connection
 
 # In[2]:
 
@@ -38,6 +39,7 @@ class Simulator():
         self.dict_stocks_Quandl = dict_stocks_Quandl
         self.userList_dict = {}
         self.sp500_realtime_dict={}
+        conn = S3Connection('<aws access key>', '<aws secret key>')
 #---------------------------------------------------------------------------------------------------#
 
     def stream_generator(self):
@@ -79,13 +81,11 @@ class Simulator():
             time2.sleep(1)
         return None
 #---------------------------------------------------------------------------------------------------#
-    def gen_UniqueId(self):
-        # Use uuid4 and return an unique id
-        return str(uuid.uuid4())
-
     def userList(self):
-
-        self.userList_dict = pickle.load(open('userList.pkl','rb'))
+        pickler = open('userList.pkl','rb')
+        self.userList_dict = pickle.load(pickler)
+        print("Piclkling done!")
+        pickler.close()
 
 #---------------------------------------------------------------------------------------------------#
     # main function
