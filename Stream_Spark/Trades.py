@@ -40,15 +40,15 @@ def getSqlContextInstance(sparkContext):
 
 def sparkRun(rdd):
     sqlContext = getSqlContextInstance(rdd.context)
-    rowRdd = rdd.map(lambda w: Row(uuid_trade=str(json.loads(w)["uuid_trade"]), userName_trade=json.loads(w)["userName_trade"],
+    rowRdd = rdd.map(lambda w: Row(uuid_trade=str(json.loads(w)["uuid_trade"]),
     timestamp=json.loads(w)["timestamp"] ,traded_stock=json.loads(w)["traded_stock"],traded_stock_price=json.loads(w)["traded_stock_price"],traded_quantity=json.loads(w)["traded_quantity"],
     trade_type=json.loads(w)["trade_type"],traded_stock_sector=json.loads(w)["traded_stock_sector"]))
     df_trades = sqlContext.createDataFrame(rowRdd)
     print(df_trades)
     for row in df_trades.collect():
-        stsp_timestamp  = row.timestamp.encode('utf-8')
+        stsp_timestamp  = row.timestamp
         tradeTime  = datetime.strptime(stsp_timestamp, "%Y-%m-%d %H:%M:%S")
-        userName = row.userName_trade
+        #userName = row.userName_trade
         userId = row.uuid_trade
         userId = uuid.UUID(userId)
         tradeType = row.trade_type
@@ -59,7 +59,7 @@ def sparkRun(rdd):
         tickerPrice = 0 if tickerPrice == None else tickerPrice
         total_val = tickerPrice * tradeQuantity
         # Push the trade to the trade history database
-        session.execute(db_pushTrade,(userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType))
+        session.execute(db_pushTrade,(userId,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType))
 
         # Get all the values and counts from the database for the uses below
         row_val = session.execute(ses_val,(userId,tickerName, ))
@@ -121,11 +121,11 @@ if __name__ == "__main__":
     ssc = StreamingContext(sc, 1) # Window 1 seconds
 
     zkQuorum = "localhost:2181"
-    kafka_topic = "NewTopic"
-    kafka_brokers = "ec2-34-199-79-38.compute-1.amazonaws.com:9092"
+    kafka_topic = "stupid"
+    kafka_brokers = "ec2-34-197-245-192.compute-1.amazonaws.com:9092"
     ########---*********************************************************************************---#######
     # Connect to Cassandra
-    server_EC2 = Cluster(['ec2-34-198-236-106.compute-1.amazonaws.com'])
+    server_EC2 = Cluster(['ec2-34-198-185-77.compute-1.amazonaws.com'])
     session = server_EC2.connect('stockportfolio')
     ########---*********************************************************************************---#######
 
@@ -137,7 +137,7 @@ if __name__ == "__main__":
     #ses_prop = session.prepare(proportion_query)
 
     # prepares the session for pushing the latest trades into the database
-    db_pushTrade = session.prepare("INSERT INTO db_trades_stream (userId,userName,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType) VALUES (?,?,?,?,?,?,?,?,?) USING TTL 1036800")
+    db_pushTrade = session.prepare("INSERT INTO db_trades_stream (userId,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType) VALUES (?,?,?,?,?,?,?,?) USING TTL 1036800")
     db_pushTotalCount = session.prepare("INSERT INTO db_user_portCount(userId,portfolio_count,portfolio_value) VALUES (?,?,?)")
     db_pushStockCount = session.prepare("INSERT INTO db_user_portfolio(userId,tickerName,tickerQuant,tickerValue) VALUES (?,?,?,?)")
     #db_pushStockCount = session.prepare("INSERT INTO db_user_sector(userId,sec_prop,tickerSector) VALUES (?,?,?)")
