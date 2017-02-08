@@ -32,7 +32,7 @@ class Simulator():
     # define the constructor
     def __init__(self,dict_stocks_Quandl,ip_addr):
 
-        self.partition_key = partition_key
+        #self.partition_key = partition_key
         self.ip_addr = ip_addr
         self.producer = KafkaProducer(bootstrap_servers=self.ip_addr)
         #self.userCount = userCount
