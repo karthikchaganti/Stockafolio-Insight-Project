@@ -23,9 +23,9 @@ def get_user_data(user):
 def get_user_json_data(user):
 
     hist_trades, port_list, port_total = get_user_data
-    hist_trades_json = [{"tickername":row.tickername, "tradequantity":row.tradequantity,"tickerprice":row.tickerprice,"total_val":row.total_val,"tradetype":row.tradetype,"tradetime":row.tradetime}]for row in hist_trades
-    port_list_json   = [{"tickername":row.tickername,"tickerquant":tickerquant,"tickervalue":tickervalue}] for row in port_list
-    port_total_json  = [{"portfolio_count":row.portfolio_count,"portfolio_value":row.portfolio_value}] from row in port_total
+    hist_trades_json = [{"tickername":row.tickername, "tradequantity":row.tradequantity,"tickerprice":row.tickerprice,"total_val":row.total_val,"tradetype":row.tradetype,"tradetime":row.tradetime}for row in hist_trades]
+    port_list_json   = [{"tickername":row.tickername,"tickerquant":tickerquant,"tickervalue":tickervalue} for row in port_list]
+    port_total_json  = [{"portfolio_count":row.portfolio_count,"portfolio_value":row.portfolio_value} for row in port_total]
 
     return jsonify(hist_trades = hist_trades_json,port_list=port_list_json,port_total=port_total_json)
 
