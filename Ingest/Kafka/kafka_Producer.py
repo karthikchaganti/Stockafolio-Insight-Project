@@ -30,7 +30,7 @@ from kafka.errors import KafkaError
 # Definition of the main class
 class Simulator():
     # define the constructor
-    def __init__(self,dict_stocks_Quandl,ip_addr,partition_key):
+    def __init__(self,dict_stocks_Quandl,ip_addr):
 
         self.partition_key = partition_key
         self.ip_addr = ip_addr
@@ -74,10 +74,10 @@ class Simulator():
                 #singleTrade = str_fmt.format(timestamp,uuid_trade,userName_trade,traded_stock,traded_stock_price,traded_quantity,trade_type,traded_stock_sector)
                 singleTrade = json.dumps({"timestamp":timestamp_str,"uuid_trade":uuid_trade,"traded_stock":traded_stock.rstrip(),"traded_stock_price":traded_stock_price,
                 "traded_quantity":traded_quantity,"trade_type":trade_type,"traded_stock_sector":traded_stock_sector}).encode('utf-8')
-                
-              
 
-                self.producer.send('stupid',value=singleTrade)
+
+
+                self.producer.send('StreamTrades',value=singleTrade)
             #time2.sleep(1)
             timestamp += timedelta(seconds=1)
             if(datetime.time(timestamp) > endtime):
@@ -89,16 +89,15 @@ class Simulator():
     def userList(self):
         pickler = open('userList.pkl','rb')
         self.userList_dict = pickle.load(pickler)
-        print("Piclkling done!")
+        #print("Piclkling done!")
         pickler.close()
-        
+
 #---------------------------------------------------------------------------------------------------#
     # main function
 if __name__ == "__main__":
 
     args = sys.argv
     ip_addr = str(args[1])
-    partition_key = str(args[2])
     #userCount = str(args[3])
 
     # Initiate the user count
@@ -114,7 +113,7 @@ if __name__ == "__main__":
         key = row.pop('Ticker'.rstrip())
         dict_stocks_Quandl[key].append(row)
 
-    obj_Simulator = Simulator(dict_stocks_Quandl,ip_addr,partition_key)
+    obj_Simulator = Simulator(dict_stocks_Quandl,ip_addr)
     obj_Simulator.userList()
     obj_Simulator.stream_generator()
 
