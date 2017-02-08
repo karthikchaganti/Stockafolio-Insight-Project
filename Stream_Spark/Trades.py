@@ -121,7 +121,7 @@ if __name__ == "__main__":
     ssc = StreamingContext(sc, 1) # Window 1 seconds
 
     zkQuorum = "localhost:2181"
-    kafka_topic = "stupid"
+    kafka_topic = "StreamTrades"
     kafka_brokers = "ec2-34-197-245-192.compute-1.amazonaws.com:9092"
     ########---*********************************************************************************---#######
     # Connect to Cassandra
