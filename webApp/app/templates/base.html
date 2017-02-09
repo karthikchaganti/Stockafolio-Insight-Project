@@ -62,9 +62,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Hello {{user}}</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        <h3>Hello {{user}}</h3>
       </div>
     </div>
 
@@ -72,21 +70,51 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <h2>Total in Numbers</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Total Volume</th>
+                <th>Total Value</th>
+              </tr>
+            </thead>
+            <tbody id="port_counter">
+                {% for val in port_total %}
+                              <tr>
+                                <td>{{val.portfolio_count}}</td>
+                                <td>{{val.portfolio_value}}</td>
+                              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
         </div>
         <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <h2>Portfolio</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Ticker</th>
+                <th>Quantity</th>
+                <th>Total Value</th>
+              </tr>
+            </thead>
+            <tbody id="port_lister">
+                {% for val in port_list %}
+                              <tr>
+                                <td>{{val.tickername}}</td>
+                                <td>{{val.tickerquant}}</td>
+                                <td>{{val.tickervalue}}</td>
+                              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
        </div>
         <div class="col-md-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <h2>Sector-Wise Proportion</h2>
+
         </div>
       </div>
+    </div>
 
 <div class="container">
   <h2>Latest Trades</h2>
@@ -123,54 +151,5 @@
         <p>&copy; Karthik Chaganti </p>
       </footer>
     </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script type="text/javascript">
-      var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-    </script>
-    <script type=text/javascript>
-    function update_userdata() {
-    	$.getJSON($SCRIPT_ROOT + '/retrieve_user_data', {user: {{ user }} },
-    	function(data) {
-    		var portfolio = "";
-    		var portfolio_extra = "";
-    		var trades = "";
-    		for(var i=0; i<data.hist_trades.length;i++) {
-    			trades += "<tr><td>" + data.latest_trades[i].company + "</td><td align='right'>" + data.latest_trades[i].num_stock + "</td><td>" + data.latest_trades[i].tradetime + "</td></tr>";
-    		}
-    		document.getElementById("trades").innerHTML = trades;
-    		for(var i=0; i<data.portfolio.length;i++) {
-    			ratio=Math.abs(data.portfolio[i].portfolio_ratio);
-    			shares=data.portfolio[i].stock_total
-    			if (data.portfolio[i].stock_total < 0) {
-    				shares=-1 * shares;
-    				shares=shares + " (short)";
-    			}
-    			if(i < 5) {
-    				portfolio += "<tr><td>" + data.portfolio[i].company + "</td><td align='right'>" + shares + "</td><td align='right'>" + ratio + "%</td><td>" + data.portfolio[i].graphic +  "</td></tr>";
-    			} else {
-    				portfolio_extra += "<tr><td>" + data.portfolio[i].company + "</td><td align='right'>" + shares + "</td><td align='right'>" + ratio + "%</td><td>" + data.portfolio[i].graphic +  "</td></tr>";
-    			}
-    		}
-    		document.getElementById("portfolio").innerHTML = portfolio;
-    		document.getElementById("portfolio_extra").innerHTML = portfolio_extra;
-    		for(var i=0; i<data.news.length;i++) {
-    		news += "<tr><td>" + data.news[i].company + "</td><td>" + data.news[i].summary + "</td><td><a href='" + data.news[i].source + "'>" + data.news[i].author + "</a></td><td>" + data.news[i].newsoutlet + "</td><td>" + data.news[i].newstime + "</td><td>" + "</td></tr>";
-    		}
-    		document.getElementById("news").innerHTML = news;
-    	});
-    }
-    $(function() {
-    	setInterval(update_userdata, 2000);
-    });
-    </script>
-  </body>
+</body>
 </html>
