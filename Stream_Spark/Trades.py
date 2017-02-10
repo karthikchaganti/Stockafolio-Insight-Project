@@ -23,7 +23,7 @@ import uuid
 
 
 def st_getcounter(table):
-        value_query = "SELECT tickerQuant, tickerValue FROM " + table + " WHERE userId = ? AND tickerName = ?"
+        value_query = "SELECT tickerQuant, tickerValue FROM " + table + " WHERE userId = ? AND tickersector = ? AND tickerName = ?"
         st_value_query = session.prepare(value_query)
         return st_value_query
 
@@ -62,7 +62,7 @@ def sparkRun(rdd):
         session.execute(db_pushTrade,(userId,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType))
 
         # Get all the values and counts from the database for the uses below
-        row_val = session.execute(ses_val,(userId,tickerName, ))
+        row_val = session.execute(ses_val,(userId,tickerSector,tickerName, ))
         row_cnt =  session.execute(ses_count,(userId, ))
         #with open('log.txt', 'a') as f:
             #f.write(row_val)
@@ -110,7 +110,7 @@ def sparkRun(rdd):
             #row_sec_prop = 0 + row_sec_prop
 
         session.execute(db_pushTotalCount,(userId,row_portfolio_count,row_portfolio_value))
-        session.execute(db_pushStockCount,(userId,tickerName,row_stck_quant,row_stck_value,tickerSector))
+        session.execute(db_pushStockCount,(userId,tickerSector,tickerName,row_stck_quant,row_stck_value))
         #session.execute(db_user_sector,(userId,row_sec_prop,tickerSector))
 
     ########---*********************************************************************************---#######
@@ -121,7 +121,7 @@ if __name__ == "__main__":
     ssc = StreamingContext(sc, 1) # Window 1 seconds
 
     zkQuorum = "localhost:2181"
-    kafka_topic = "StreamTrades"
+    kafka_topic = "StreamingTrades"
     kafka_brokers = "ec2-34-197-245-192.compute-1.amazonaws.com:9092"
     ########---*********************************************************************************---#######
     # Connect to Cassandra
@@ -139,7 +139,7 @@ if __name__ == "__main__":
     # prepares the session for pushing the latest trades into the database
     db_pushTrade = session.prepare("INSERT INTO db_trades_stream (userId,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType) VALUES (?,?,?,?,?,?,?,?) USING TTL 1036800")
     db_pushTotalCount = session.prepare("INSERT INTO db_user_portCount(userId,portfolio_count,portfolio_value) VALUES (?,?,?)")
-    db_pushStockCount = session.prepare("INSERT INTO db_user_portfolio(userId,tickerName,tickerQuant,tickerValue) VALUES (?,?,?,?)")
+    db_pushStockCount = session.prepare("INSERT INTO db_user_portfolio(userId,tickerSector,tickerName,tickerQuant,tickerValue) VALUES (?,?,?,?,?)")
     #db_pushStockCount = session.prepare("INSERT INTO db_user_sector(userId,sec_prop,tickerSector) VALUES (?,?,?)")
     # Kafka Consumer
     KafkaStream = KafkaUtils.createDirectStream(ssc, [kafka_topic], {"bootstrap.servers":kafka_brokers})
