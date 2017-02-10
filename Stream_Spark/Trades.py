@@ -56,7 +56,7 @@ def sparkRun(rdd):
         tickerSector = row.traded_stock_sector
         tickerPrice = row.traded_stock_price
         tradeQuantity = row.traded_quantity
-        tickerPrice = 0 if tickerPrice == None else tickerPrice
+        tickerPrice = 15 if tickerPrice == None else tickerPrice
         total_val = tickerPrice * tradeQuantity
         # Push the trade to the trade history database
         session.execute(db_pushTrade,(userId,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType))
@@ -110,7 +110,7 @@ def sparkRun(rdd):
             #row_sec_prop = 0 + row_sec_prop
 
         session.execute(db_pushTotalCount,(userId,row_portfolio_count,row_portfolio_value))
-        session.execute(db_pushStockCount,(userId,tickerName,row_stck_quant,row_stck_value))
+        session.execute(db_pushStockCount,(userId,tickerName,row_stck_quant,row_stck_value,tickerSector))
         #session.execute(db_user_sector,(userId,row_sec_prop,tickerSector))
 
     ########---*********************************************************************************---#######
