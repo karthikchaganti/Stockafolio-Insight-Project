@@ -77,7 +77,7 @@ class Simulator():
 
 
 
-                self.producer.send('StreamTrades',value=singleTrade)
+                self.producer.send('StreamingTrades',value=singleTrade)
             #time2.sleep(1)
             timestamp += timedelta(seconds=1)
             if(datetime.time(timestamp) > endtime):
