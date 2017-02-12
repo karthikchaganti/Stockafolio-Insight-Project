@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Stockafolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <script type=text/javascript>
+      $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+      // function updateChart(){
+      //   var usrJsonData = $.getJSON($SCRIPT_ROOT + '/chartData', {user:'{{user}}'});
+      //   //var usrJsonData = JSON.parse(usrJsonData)
+      //   var data = new google.visualization.DataTable(usrJsonData);
+      //
+      //     var options = {
+      //       pieHole: 0.5,
+      //       pieSliceTextStyle: {
+      //         color: 'black',
+      //       },
+      //       legend: 'none'
+      //     };
+      //
+      //     var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+      //     chart.draw(data, options);
+      //   }
+      //
+
+
+    // google.charts.load('current', {'packages':['corechart']});
+    // google.charts.setOnLoadCallback(updateChart);
+    //
+    //   function updateChart(){
+    //     var usrJsonData = $.getJSON($SCRIPT_ROOT + '/chartData', {user:'{{user}}'});
+    //     //var usrJsonData = JSON.parse(usrJsonData)
+    //     var data = new google.visualization.DataTable(usrJsonData);
+    //
+    //       var options = {
+    //         pieHole: 0.5,
+    //         pieSliceTextStyle: {
+    //           color: 'black',
+    //         },
+    //         legend: 'none'
+    //       };
+    //
+    //       var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+    //       chart.draw(data, options);
+    //     }
+
+        function drawChart() {
+        var jsonData = $.ajax({
+            url: "/chartData",
+            data:{user:'{{user}}'},
+            dataType: "json",
+            async: false
+            }).responseText;
+
+
+
+            var data = new google.visualization.DataTable(jsonData);
+
+        var options = {
+          pieHole: 0.5,
+          pieSliceTextStyle: {
+            color: 'black',
+          },
+          legend: 'none'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+        chart.draw(data, options);
+      };
+//    )});
+  // $(function () {
+  //     setInterval(updateChart, 1000000);
+  //   });
+  </script>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Stockafolio</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h3>Hello {{user}}</h3>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Total in Numbers</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Total Volume</th>
+                <th>Total Value</th>
+              </tr>
+            </thead>
+            <tbody id="port_counter">
+                {% for val in port_total %}
+                              <tr>
+                                <td>{{val.portfolio_count}}</td>
+                                <td>{{val.portfolio_value}}</td>
+                              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-4">
+          <h2>Portfolio</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Ticker</th>
+                <th>Quantity</th>
+                <th>Total Value</th>
+                <th>Sector</th>
+              </tr>
+            </thead>
+            <tbody id="port_list">
+                {% for val in port_list %}
+                              <tr>
+                                <td>{{val.tickername}}</td>
+                                <td>{{val.tickerquant}}</td>
+                                <td>{{val.tickervalue}}</td>
+                                <td>{{val.tickersector}}</td>
+                              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+       </div>
+        <div class="col-md-4">
+          <h2>Sector-Wise Proportion</h2>
+          <div id="donut_single" style="width: 900px; height: 500px;"></div>
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+  <h2>Latest Trades</h2>
+  <!--<p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p> -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Stock</th>
+        <th>Volume</th>
+        <th>Price</th>
+        <th>Total Value</th>
+        <th>Buy/Sold</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for val in hist_trades %}
+                      <tr>
+                        <td>{{val.tickername}}</td>
+                        <td>{{val.tradequantity}}</td>
+                        <td>{{val.tickerprice}}</td>
+                        <td>{{val.total_val}}</td>
+                        <td>{{val.tradetype}}</td>
+                        <td>{{val.tradetime}}</td>
+                      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Karthik Chaganti </p>
+      </footer>
+    </div> <!-- /container -->
+
+</body>
+</html>
