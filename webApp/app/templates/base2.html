@@ -14,9 +14,10 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.css" rel="stylesheet">
+    <!-- <link href="../static/css/pen.css" rel="stylesheet"> -->
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
 
     <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
@@ -37,73 +38,24 @@
     <script type="text/javascript">
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
-
-      // function updateChart(){
-      //   var usrJsonData = $.getJSON($SCRIPT_ROOT + '/chartData', {user:'{{user}}'});
-      //   //var usrJsonData = JSON.parse(usrJsonData)
-      //   var data = new google.visualization.DataTable(usrJsonData);
-      //
-      //     var options = {
-      //       pieHole: 0.5,
-      //       pieSliceTextStyle: {
-      //         color: 'black',
-      //       },
-      //       legend: 'none'
-      //     };
-      //
-      //     var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
-      //     chart.draw(data, options);
-      //   }
-      //
-
-
-    // google.charts.load('current', {'packages':['corechart']});
-    // google.charts.setOnLoadCallback(updateChart);
-    //
-    //   function updateChart(){
-    //     var usrJsonData = $.getJSON($SCRIPT_ROOT + '/chartData', {user:'{{user}}'});
-    //     //var usrJsonData = JSON.parse(usrJsonData)
-    //     var data = new google.visualization.DataTable(usrJsonData);
-    //
-    //       var options = {
-    //         pieHole: 0.5,
-    //         pieSliceTextStyle: {
-    //           color: 'black',
-    //         },
-    //         legend: 'none'
-    //       };
-    //
-    //       var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
-    //       chart.draw(data, options);
-    //     }
-
-        function drawChart() {
+    function drawChart() {
         var jsonData = $.ajax({
             url: "/chartData",
             data:{user:'{{user}}'},
             dataType: "json",
             async: false
             }).responseText;
-
-
-
-            var data = new google.visualization.DataTable(jsonData);
-
+        var data = new google.visualization.DataTable(jsonData);
         var options = {
           pieHole: 0.5,
+          chartArea: {'width': '90%', 'height': '100%'},
           pieSliceTextStyle: {
             color: 'black',
           },
-          legend: 'none'
         };
-
         var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
         chart.draw(data, options);
       };
-//    )});
-  // $(function () {
-  //     setInterval(updateChart, 1000000);
-  //   });
   </script>
   </head>
 
@@ -174,7 +126,7 @@
                 <th>Sector</th>
               </tr>
             </thead>
-            <tbody id="port_list">
+            <tbody>
                 {% for val in port_list %}
                               <tr>
                                 <td>{{val.tickername}}</td>
@@ -188,10 +140,10 @@
        </div>
         <div class="col-md-4">
           <h2>Sector-Wise Proportion</h2>
-          <div id="donut_single" style="width: 900px; height: 500px;"></div>
+          <div id="donut_single" style="width: 600px; height: 200px;"></div>
         </div>
-      </div>
     </div>
+</div>
 
 <div class="container">
   <h2>Latest Trades</h2>
