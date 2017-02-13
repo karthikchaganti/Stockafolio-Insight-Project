@@ -17,6 +17,7 @@ session.default_fetch_size = None
 
 def get_user_data(user):
     # Read user's data from cassandra dB
+    hist_trades_latest = session.execute("SELECT * FROM db_trades_stream LIMIT 10")
     hist_trades = session.execute("SELECT tickername, tradequantity,tickerprice,total_val,tradetype,tradetime FROM db_trades_stream  WHERE userid= " + user + " ORDER BY tradetime DESC LIMIT 10")
     port_list   = session.execute("SELECT tickersector, tickername,tickerquant,tickervalue FROM db_user_portfolio WHERE userid=" + user + "LIMIT 7")
     port_list2   = session.execute("SELECT tickervalue,tickername, tickerquant,tickersector FROM db_user_portfolio WHERE userid=" + user)
@@ -78,6 +79,11 @@ def get_user_cust():
     hist_trades,port_list,port_total,sector_dict_chart_json = get_user_data(request.args.get("user"))
 
     return render_template("base.html", user=user, hist_trades = hist_trades, port_list = port_list, port_total = port_total)
+
+
+@app.route('/slides')
+def get_user_cust1():
+    return render_template("slides.html")
 
 @app.route('/user')
 def get_user():
