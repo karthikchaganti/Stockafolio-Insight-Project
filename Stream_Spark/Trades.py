@@ -48,6 +48,7 @@ def sparkRun(rdd):
     for row in df_trades.collect():
         stsp_timestamp  = row.timestamp
         tradeTime  = datetime.strptime(stsp_timestamp, "%Y-%m-%d %H:%M:%S")
+        tradeDate = tradeTime.date()
         #userName = row.userName_trade
         userId = row.uuid_trade
         userId = uuid.UUID(userId)
@@ -60,7 +61,7 @@ def sparkRun(rdd):
         total_val = tickerPrice * tradeQuantity
         # Push the trade to the trade history database
         session.execute(db_pushTrade,(userId,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType))
-
+        session.execute(db_pushTradeLive,(userId,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType,tradeDate))
         # Get all the values and counts from the database for the uses below
         row_val = session.execute(ses_val,(userId,tickerSector,tickerName, ))
         row_cnt =  session.execute(ses_count,(userId, ))
@@ -138,6 +139,7 @@ if __name__ == "__main__":
 
     # prepares the session for pushing the latest trades into the database
     db_pushTrade = session.prepare("INSERT INTO db_trades_stream (userId,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType) VALUES (?,?,?,?,?,?,?,?) USING TTL 1036800")
+    db_pushTradeLive = session.prepare("INSERT INTO db_trades_live (userId,tickerName,tickerSector,tickerPrice,tradeQuantity,total_val,tradeTime,tradeType,tradeDate) VALUES (?,?,?,?,?,?,?,?,?) USING TTL 1036800")
     db_pushTotalCount = session.prepare("INSERT INTO db_user_portCount(userId,portfolio_count,portfolio_value) VALUES (?,?,?)")
     db_pushStockCount = session.prepare("INSERT INTO db_user_portfolio(userId,tickerSector,tickerName,tickerQuant,tickerValue) VALUES (?,?,?,?,?)")
     #db_pushStockCount = session.prepare("INSERT INTO db_user_sector(userId,sec_prop,tickerSector) VALUES (?,?,?)")
