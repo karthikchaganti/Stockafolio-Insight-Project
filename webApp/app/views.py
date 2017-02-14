@@ -17,13 +17,22 @@ session.default_fetch_size = None
 
 def get_user_data(user):
     # Read user's data from cassandra dB
-    hist_trades_latest = session.execute("SELECT * FROM db_trades_stream LIMIT 10")
+    hist_trades_live = session.execute("SELECT * FROM db_trades_live LIMIT 5")
+
+    topK_traders = session.execute("SELECT * FROM db_user_portcount LIMIT 10")
+
     hist_trades = session.execute("SELECT tickername, tradequantity,tickerprice,total_val,tradetype,tradetime FROM db_trades_stream  WHERE userid= " + user + " ORDER BY tradetime DESC LIMIT 10")
-    port_list   = session.execute("SELECT tickersector, tickername,tickerquant,tickervalue FROM db_user_portfolio WHERE userid=" + user + "LIMIT 7")
+
+    port_list   = session.execute("SELECT tickersector, tickername,tickerquant,tickervalue FROM db_user_portfolio WHERE userid=" + user + "LIMIT 10")
+
     port_list2   = session.execute("SELECT tickervalue,tickername, tickerquant,tickersector FROM db_user_portfolio WHERE userid=" + user)
+
     port_total  = session.execute("SELECT portfolio_count, portfolio_value FROM db_user_portcount WHERE userid=" + user)
+
     port_list_dict = map(lambda row: dict(zip(["tickervalue","tickername","tickerquant","tickersector"], row)), port_list2)
+
     lister = ['Consumer Discretionary ','Consumer Staples ','Financials ','Energy ','Health Care ','Industrials ','Information Technology ','Materials ','Real Estate ','Telecommunications Services ','Utilities ']
+
     sector_dict = {}
 
     for row in port_list_dict:
@@ -44,6 +53,10 @@ def get_user_data(user):
         else:
             valuer = 1
             statevals.append(valuer)
+
+
+
+
 
     sector_dict_chart_json =    """{
                                     "cols": [
@@ -84,6 +97,11 @@ def get_user_cust():
 @app.route('/slides')
 def get_user_cust1():
     return render_template("slides.html")
+
+@app.route('/firm')
+def renderFirm():
+
+    return render_template("firm.html")
 
 @app.route('/user')
 def get_user():
