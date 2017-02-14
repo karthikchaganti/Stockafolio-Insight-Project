@@ -46,6 +46,7 @@ def sparkRun(rdd):
     df_trades = sqlContext.createDataFrame(rowRdd)
     print(df_trades)
     for row in df_trades.collect():
+        dupkey = 1
         stsp_timestamp  = row.timestamp
         tradeTime  = datetime.strptime(stsp_timestamp, "%Y-%m-%d %H:%M:%S")
         tradeDate = tradeTime.date()
@@ -111,6 +112,7 @@ def sparkRun(rdd):
             #row_sec_prop = 0 + row_sec_prop
 
         session.execute(db_pushTotalCount,(userId,row_portfolio_count,row_portfolio_value))
+        session.execute(db_pushDummyCount,(dupkey,userId,row_portfolio_count,row_portfolio_value))
         session.execute(db_pushStockCount,(userId,tickerSector,tickerName,row_stck_quant,row_stck_value))
         #session.execute(db_user_sector,(userId,row_sec_prop,tickerSector))
 
@@ -142,6 +144,7 @@ if __name__ == "__main__":
     #db_pushTradeLive = session.prepare("INSERT INTO db_trades_live (tradeDate,tradeTime,tickerName,tickerPrice,tickerSector,total_val,tradeQuantity,tradeType,userId) VALUES (?,?,?,?,?,?,?,?,?) USING TTL 1036800")
     db_pushTotalCount = session.prepare("INSERT INTO db_user_portCount(userId,portfolio_count,portfolio_value) VALUES (?,?,?)")
     db_pushStockCount = session.prepare("INSERT INTO db_user_portfolio(userId,tickerSector,tickerName,tickerQuant,tickerValue) VALUES (?,?,?,?,?)")
+    db_pushDummyCount = session.prepare("INSERT INTO db_user_DummyCount(dupkey,userId,portfolio_count,portfolio_value) VALUES (?,?,?,?)")
     #db_pushStockCount = session.prepare("INSERT INTO db_user_sector(userId,sec_prop,tickerSector) VALUES (?,?,?)")
     # Kafka Consumer
     KafkaStream = KafkaUtils.createDirectStream(ssc, [kafka_topic], {"bootstrap.servers":kafka_brokers})
