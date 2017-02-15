@@ -13,6 +13,7 @@ as quick decisions make a faster and profiting trade. That is what I tried to re
 - A highly scalable, low-latent and always available stock portfolio managmeent application.
 - It can handle 10 million users and a throughput of 20,000 trades per second. Yet the portfolio is updated in the blink of an eye.
 - Built using all distributed open-source technologies.
+
 ### The Stack
  - Built on Amazon Webservices EC2
 
