@@ -11,12 +11,11 @@ import random
 
 
 # Connect to cassandra
-cluster = Cluster(["ec2-34-198-185-77.compute-1.amazonaws.com"])
+cluster = Cluster(["Use Cassandra IP"])
 session = cluster.connect("stockportfolio")
 session.default_fetch_size = None
 
 def get_user_data(user):
-    # Read user's data from cassandra dB
     hist_trades_live = session.execute("SELECT * FROM db_trades_live LIMIT 5")
 
     topK_traders = session.execute("SELECT * FROM db_user_portcount LIMIT 10")
@@ -48,16 +47,10 @@ def get_user_data(user):
     for key in lister:
         if key in sector_dict:
             valuer = sector_dict[key]
-            ## print(valuer)
             statevals.append(valuer)
         else:
             valuer = 1
             statevals.append(valuer)
-
-
-
-
-
     sector_dict_chart_json =    """{
                                     "cols": [
                                           {"id":"","label":"Sector","pattern":"","type":"string"},
@@ -106,7 +99,6 @@ def renderFirm():
 @app.route('/user')
 def get_user():
 
-    #user=request.args.get("user")
     # usrlist for demonstration purposes!
     userList = ['c9f6f8cb-133c-49a3-94d6-c9067b8817fc',
     '111a68c3-5104-4a9f-8ae1-f45cdaca9fa1',
@@ -144,6 +136,5 @@ def get_user():
 @app.route('/chartData')
 def retrieve_chart_data():
     user=request.args.get("user")
-    # print(user)
     hist_trades,port_list,port_total,sector_dict_chart_json = get_user_data(user)
     return sector_dict_chart_json

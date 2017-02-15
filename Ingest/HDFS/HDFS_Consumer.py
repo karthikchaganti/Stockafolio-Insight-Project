@@ -1,12 +1,13 @@
-# this program implements a kafka consumer that stores a data stream to HDFS.
-# It is subscribed to one topic.
 
+###############--------------------------------------------------###############
+# Author: Karthik Chaganti
+# Technology : Python
+###############--------------------------------------------------###############
 import os
-#import sys
 from kafka import KafkaClient, SimpleConsumer
 from datetime import datetime
 
-kafka = KafkaClient("172.31.0.110")
+kafka = KafkaClient("Use the Client IP")
 tempfile_path = None
 tempfile = None
 batch_counter = 0

@@ -1,3 +1,9 @@
+
+###############--------------------------------------------------###############
+# Generates Users List
+# Author: Karthik Chaganti
+# Technology : Python
+###############--------------------------------------------------###############
 import random
 import pickle
 import uuid

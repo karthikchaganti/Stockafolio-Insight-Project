@@ -1,0 +1,2 @@
+# Use this Jar for successful build
+spark-streaming-kafka-0-8-assembly_2.11-2.1.0.jar
