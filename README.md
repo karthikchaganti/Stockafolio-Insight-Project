@@ -1,7 +1,7 @@
 # Stockafolio
 ## Insight Data Engineering
-Website: http://insightdata.karthikchaganti.com/
-Presentation: https://goo.gl/DJHBbe
+- Website: http://insightdata.karthikchaganti.com/
+- Presentation: https://goo.gl/DJHBbe
 
 ## The Data Pipeline
 ![Alt text](/Data-Pipeline.png)
