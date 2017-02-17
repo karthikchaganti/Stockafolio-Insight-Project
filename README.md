@@ -1,4 +1,4 @@
-[![Analytics](https://ga-beacon.appspot.com/UA-46899860-1/chromeskel_a/readme)](https://github.com/karthikchaganti/Stockafolio-Insight-Project)
+
 # Stockafolio
 ## Insight Data Engineering
 - Website: http://insightdata.karthikchaganti.com/
@@ -30,4 +30,4 @@ as quick decisions make a faster and profiting trade. That is what I tried to re
 | Python Flask  | Server-side Web App  |
 | Hadoop HDFS | Batch File System  |
 
-
+[![Analytics](https://ga-beacon.appspot.com/UA-46899860-1/chromeskel_a/readme)](https://github.com/karthikchaganti/Stockafolio-Insight-Project)
