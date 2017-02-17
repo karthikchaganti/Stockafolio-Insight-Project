@@ -4,7 +4,7 @@
 - Presentation: https://goo.gl/DJHBbe
 
 ## The Data Pipeline
-![Alt text](/Data-Pipeline.png)
+![Alt text](/Data-Pipeline)
 
 ### Motivation
 - Back in the early 2000s, the stock portfolio updation was very slow. But today, instantaneous updation is vital
