@@ -29,6 +29,5 @@ as quick decisions make a faster and profiting trade. That is what I tried to re
 | Apache Cassandra  | Data Storage  |
 | Python Flask  | Server-side Web App  |
 | Hadoop HDFS | Batch File System  |
-
-[![Analytics](https://github.com/karthikchaganti/UA-39835933-2/Stockafolio-Insight-Project/readme/
-)](https://github.com/karthikchaganti/Stockafolio-Insight-Project)
+[![Analytics](https://ga-beacon.appspot.com/UA-92170532-1
+/chromeskel_a/readme)](https://github.com/karthikchaganti/Stockafolio-Insight-Project)
