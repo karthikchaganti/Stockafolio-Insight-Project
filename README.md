@@ -1,3 +1,4 @@
+[![Analytics](https://ga-beacon.appspot.com/UA-46899860-1/chromeskel_a/readme)](https://github.com/karthikchaganti/Stockafolio-Insight-Project)
 # Stockafolio
 ## Insight Data Engineering
 - Website: http://insightdata.karthikchaganti.com/
