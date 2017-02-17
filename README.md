@@ -30,5 +30,5 @@ as quick decisions make a faster and profiting trade. That is what I tried to re
 | Python Flask  | Server-side Web App  |
 | Hadoop HDFS | Batch File System  |
 
-[![Analytics](https://github.com/karthikchaganti/Stockafolio-Insight-Project/UA-39835933-2
-/readme)](https://github.com/karthikchaganti/Stockafolio-Insight-Project)
+[![Analytics](https://github.com/karthikchaganti/Stockafolio-Insight-Project/readme/UA-39835933-2
+)](https://github.com/karthikchaganti/Stockafolio-Insight-Project)
