@@ -29,4 +29,4 @@ as quick decisions make a faster and profiting trade. That is what I tried to re
 | Apache Cassandra  | Data Storage  |
 | Python Flask  | Server-side Web App  |
 | Hadoop HDFS | Batch File System  |
-[![Analytics](https://ga-beacon.appspot.com/UA-92170532-1/https://github.com/karthikchaganti/Stockafolio-Insight-Project/readme)](https://github.com/igrigorik/ga-beacon)
+[![Analytics](https://ga-beacon.appspot.com/UA-92170532-1/https://github.com/karthikchaganti/Stockafolio-Insight-Project)](https://github.com/igrigorik/ga-beacon)
