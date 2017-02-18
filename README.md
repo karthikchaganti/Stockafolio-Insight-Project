@@ -5,7 +5,7 @@
 - Presentation: https://goo.gl/DJHBbe
 
 ## The Data Pipeline
-![Alt text](/Data-Pipeline)
+![Alt text](/Images/Data-Pipeline.png)
 
 ### Motivation
 - Back in the early 2000s, the stock portfolio updation was very slow. But today, instantaneous updation is vital
@@ -33,6 +33,7 @@ as quick decisions make a faster and profiting trade. That is what I tried to re
 ### Data Schema
 - Data is engineered using original S&P 500 stocks and then gaussian distribution is applied to it to simulate change in every second. The script is written in python.
 - In order to simulate high scalability, a total of 10 million users are generated who keep trading on 1-500+ of these stocks randomly.
+![Alt text](/Images/Trades.png)
 
 
 
