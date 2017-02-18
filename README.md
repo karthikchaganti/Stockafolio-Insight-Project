@@ -29,4 +29,12 @@ as quick decisions make a faster and profiting trade. That is what I tried to re
 | Apache Cassandra  | Data Storage  |
 | Python Flask  | Server-side Web App  |
 | Hadoop HDFS | Batch File System  |
+
+### Data Schema
+- Data is engineered using original S&P 500 stocks and then gaussian distribution is applied to it to simulate change in every second. The script is written in python.
+- In order to simulate high scalability, a total of 10 million users are generated who keep trading on 1-500+ of these stocks randomly.
+
+
+
+
 [![Analytics](https://ga-beacon.appspot.com/UA-92170532-1/https://github.com/karthikchaganti/Stockafolio-Insight-Project)](https://github.com/igrigorik/ga-beacon)
