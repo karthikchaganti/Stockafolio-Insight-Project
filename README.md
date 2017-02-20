@@ -23,6 +23,7 @@ as quick decisions make a faster and profiting trade. That is what I tried to re
 ### The Stack
  - Built on Amazon Web Services EC2 - m4.4x large clusters total containing 8 Nodes with a total of 512 GB of RAM. 
  - 1 TB of Magnetic Storage has been used. 
+ - All the code is written in Python. 
 
 
 | Tecnology     | Purpose       |
@@ -34,6 +35,7 @@ as quick decisions make a faster and profiting trade. That is what I tried to re
 | Apache Cassandra  | Data Storage  |
 | Python Flask  | Server-side Web App  |
 | Hadoop HDFS | Batch File System  |
+| Amazon S3 | Source of Truth |
 
 ### Data Schema
 - Data is engineered using original S&P 500 stocks and then gaussian distribution is applied to it to simulate change in every second. The script is written in python.
