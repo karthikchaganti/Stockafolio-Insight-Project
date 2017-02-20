@@ -1,7 +1,8 @@
 
 # Stockafolio
+Insight Data Engineering Fellowship, New York City
 ### Your Portfolio at a glance!
-> This project is done as part of Insight Data Engineering Fellowship, Insight Data Science, New York City
+> 
 - Project Website: http://insightdata.karthikchaganti.com/
 - Project Presentation: https://goo.gl/DJHBbe
 
