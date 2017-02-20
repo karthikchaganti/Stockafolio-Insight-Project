@@ -21,7 +21,8 @@ as quick decisions make a faster and profiting trade. That is what I tried to re
 
 
 ### The Stack
- - Built on Amazon Webservices EC2
+ - Built on Amazon Web Services EC2 - m4.4x large clusters total containing 8 Nodes with a total of 512 GB of RAM. 
+ - 1 TB of Magnetic Storage has been used. 
 
 
 | Tecnology     | Purpose       |
