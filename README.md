@@ -12,6 +12,9 @@ Insight Data Engineering Fellowship, New York City
 - The website hosting the application contains two dashboards, one for the Users and one for the Trading firm to look at the overall trading patterns of all the traders in a day and get some insights to serve them better. 
 - Built using all distributed open-source technologies.
 
+## The Website
+![Alt text](/Images/Stockafolio.gif)
+
 ## The Data Pipeline
 ![Alt text](/Images/Data-Pipeline.png)
 
