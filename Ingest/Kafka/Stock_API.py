@@ -41,7 +41,7 @@ df = pd.concat(symbols)
 #define cell with the columns that i need
 cell= df[['sym','Close']]
 #changing sort of Symbol (ascending) and Date(descending) setting Symbol as first column and changing date format
-cell.set_index('sym').to_csv('Stocks_SP500_Final.csv', date_format='%d/%m/%Y')
+cell.set_index('sym').to_csv('StocksInfo.csv', date_format='%d/%m/%Y')
 
 
 # In[ ]:
