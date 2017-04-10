@@ -23,7 +23,7 @@ tickers_file.close()
 
 symbols=[]
 quote = '"'
-quandl.ApiConfig.api_key = "mQMp_M3zVvm8w9mA13hh"
+quandl.ApiConfig.api_key = "****" # use real api key here. Masked for security
 #try:
     #for symbol,sector in zip(symbols_list,sector_list):
 for symbol in symbols_list:
